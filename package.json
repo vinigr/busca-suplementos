@@ -1,15 +1,25 @@
 {
   "name": "busca-suplementos-api",
+  "type": "module",
   "version": "1.0.50",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "bun run --watch src/index.ts"
+    "dev": "bun run --watch src/index.ts",
+    "db": "bun src/db/dbScript.ts"
   },
   "dependencies": {
-    "elysia": "latest"
+    "elysia": "latest",
+    "dotenv": "^16.4.5",
+    "orchid-orm": "^1.23.4",
+    "orchid-orm-valibot": "^0.0.3",
+    "valibot": "^0.30.0"
   },
   "devDependencies": {
-    "bun-types": "latest"
+    "bun-types": "latest",
+    "rake-db": "^2.15.3",
+    "orchid-orm-test-factory": "^0.5.6",
+    "@types/node": "^20.11.27",
+    "typescript": "^5.4.2"
   },
   "module": "src/index.js"
 }
