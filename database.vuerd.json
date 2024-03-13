@@ -1,0 +1,1647 @@
+{
+  "canvas": {
+    "version": "2.2.13",
+    "width": 2000,
+    "height": 2000,
+    "scrollTop": -510,
+    "scrollLeft": 0,
+    "zoomLevel": 0.9,
+    "show": {
+      "tableComment": true,
+      "columnComment": true,
+      "columnDataType": true,
+      "columnDefault": true,
+      "columnAutoIncrement": false,
+      "columnPrimaryKey": true,
+      "columnUnique": false,
+      "columnNotNull": true,
+      "relationship": true
+    },
+    "database": "MySQL",
+    "databaseName": "",
+    "canvasType": "ERD",
+    "language": "GraphQL",
+    "tableCase": "pascalCase",
+    "columnCase": "camelCase",
+    "highlightTheme": "VS2015",
+    "bracketType": "none",
+    "setting": {
+      "relationshipDataTypeSync": true,
+      "relationshipOptimization": false,
+      "columnOrder": [
+        "columnName",
+        "columnDataType",
+        "columnNotNull",
+        "columnUnique",
+        "columnAutoIncrement",
+        "columnDefault",
+        "columnComment"
+      ]
+    },
+    "pluginSerializationMap": {}
+  },
+  "table": {
+    "tables": [
+      {
+        "id": "38ca4f72-8c82-4741-a226-a6768ac6b211",
+        "name": "products_types",
+        "comment": "",
+        "columns": [
+          {
+            "id": "08a41cd4-3a6d-4157-af33-4a0b1dc1906a",
+            "name": "id",
+            "comment": "",
+            "dataType": "INT",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": true,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": true,
+              "fk": false,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 60,
+              "widthDataType": 60,
+              "widthDefault": 60
+            }
+          },
+          {
+            "id": "d2b4812e-72b0-4c61-95c2-1326bc8c4c46",
+            "name": "name",
+            "comment": "",
+            "dataType": "VARCHAR",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 60,
+              "widthDataType": 60,
+              "widthDefault": 60
+            }
+          }
+        ],
+        "ui": {
+          "active": false,
+          "left": 709.2212,
+          "top": 27.4448,
+          "zIndex": 8,
+          "widthName": 94.806884765625,
+          "widthComment": 60
+        },
+        "visible": true
+      },
+      {
+        "id": "52e8ca87-8de2-4238-a9f3-75a85afe3ec3",
+        "name": "companies",
+        "comment": "",
+        "columns": [
+          {
+            "id": "7a4b7d56-51ae-49e9-bc80-93393dd997d5",
+            "name": "id",
+            "comment": "",
+            "dataType": "INT",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": true,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": true,
+              "fk": false,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 60,
+              "widthDataType": 60,
+              "widthDefault": 60
+            }
+          },
+          {
+            "id": "4a3c4eb2-cd58-4344-a5f0-384fec56ffa1",
+            "name": "name",
+            "comment": "",
+            "dataType": "VARCHAR",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": false
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 60,
+              "widthDataType": 60,
+              "widthDefault": 60
+            }
+          },
+          {
+            "id": "3109ddbd-ae2d-4061-bf13-0841dc8be466",
+            "name": "active",
+            "comment": "",
+            "dataType": "BOOLEAN",
+            "default": "true",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 60,
+              "widthDataType": 62.98297119140625,
+              "widthDefault": 60
+            }
+          },
+          {
+            "id": "6183756f-f8e5-4e45-8b04-05b86eabd981",
+            "name": "urlImage",
+            "comment": "",
+            "dataType": "VARCHAR",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": false
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 60,
+              "widthDataType": 60,
+              "widthDefault": 60
+            }
+          }
+        ],
+        "ui": {
+          "active": false,
+          "left": 69,
+          "top": 68,
+          "zIndex": 3,
+          "widthName": 68.49493408203125,
+          "widthComment": 60
+        },
+        "visible": true
+      },
+      {
+        "id": "a6d9441d-8ca9-4a7b-b19d-0b2b9cd2b6d5",
+        "name": "products",
+        "comment": "",
+        "columns": [
+          {
+            "id": "1b1f8ac0-b066-47e7-a338-7b66a4de49e4",
+            "name": "id",
+            "comment": "",
+            "dataType": "INT",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": true,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": true,
+              "fk": false,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 60,
+              "widthDataType": 60,
+              "widthDefault": 60
+            }
+          },
+          {
+            "id": "ff3bf6fa-0cd5-4c16-baae-302fb1aa159f",
+            "name": "name",
+            "comment": "",
+            "dataType": "VARCHAR",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 60,
+              "widthDataType": 60,
+              "widthDefault": 60
+            }
+          },
+          {
+            "id": "514c890d-cddc-4f62-bcb0-17a0f74543fb",
+            "name": "subtypeId",
+            "comment": "",
+            "dataType": "INT",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": false
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": true,
+              "pfk": false,
+              "widthName": 63.30793762207031,
+              "widthComment": 60,
+              "widthDataType": 60,
+              "widthDefault": 60
+            }
+          },
+          {
+            "id": "8fa25ccd-e86d-4e28-bf03-81681365077b",
+            "name": "productTypeId",
+            "comment": "",
+            "dataType": "INT",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": true,
+              "pfk": false,
+              "widthName": 91.25791931152344,
+              "widthComment": 60,
+              "widthDataType": 60,
+              "widthDefault": 60
+            }
+          },
+          {
+            "id": "81067ddc-b614-4587-8e01-1ed61abb66e9",
+            "name": "companyId",
+            "comment": "",
+            "dataType": "INT",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": true,
+              "pfk": false,
+              "widthName": 70.61395263671875,
+              "widthComment": 60,
+              "widthDataType": 60,
+              "widthDefault": 60
+            }
+          },
+          {
+            "id": "1a0d3c27-2c2e-468f-be31-5a293852f3b0",
+            "name": "portion",
+            "comment": "",
+            "dataType": "INT",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": false
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 60,
+              "widthDataType": 60,
+              "widthDefault": 60
+            }
+          },
+          {
+            "id": "5d1df00e-b82d-4cf9-b639-ddbaf240e174",
+            "name": "weight",
+            "comment": "",
+            "dataType": "INT",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": false
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 60,
+              "widthDataType": 60,
+              "widthDefault": 60
+            }
+          },
+          {
+            "id": "cc62ac85-5e26-4c43-b4cd-9a3bd95c2a61",
+            "name": "capsules",
+            "comment": "",
+            "dataType": "INT",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": false
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 60,
+              "widthDataType": 60,
+              "widthDefault": 60
+            }
+          },
+          {
+            "id": "89962c6c-e3a1-42c5-8f82-4da67ce636b7",
+            "name": "unitsMeasurement",
+            "comment": "",
+            "dataType": "ENUM",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 117.67388916015625,
+              "widthComment": 60,
+              "widthDataType": 60,
+              "widthDefault": 60
+            }
+          },
+          {
+            "id": "3f98048c-b6d1-43d6-8f82-27a79e490e08",
+            "name": "stampId",
+            "comment": "",
+            "dataType": "INT",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": false
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": true,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 60,
+              "widthDataType": 60,
+              "widthDefault": 60
+            }
+          },
+          {
+            "id": "329bba95-eac7-48bb-93fb-08d8c056f703",
+            "name": "urlImage",
+            "comment": "",
+            "dataType": "VARCHAR",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": false
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 60,
+              "widthDataType": 60,
+              "widthDefault": 60
+            }
+          }
+        ],
+        "ui": {
+          "active": false,
+          "left": 674.2239,
+          "top": 289.6687,
+          "zIndex": 2,
+          "widthName": 60,
+          "widthComment": 60
+        },
+        "visible": true
+      },
+      {
+        "id": "841e5a6b-e3b8-4432-81ff-b6199dcbadd1",
+        "name": "products_subtypes",
+        "comment": "",
+        "columns": [
+          {
+            "id": "ea5f2f76-f9c6-46c9-ace1-4b66b9255500",
+            "name": "id",
+            "comment": "",
+            "dataType": "INT",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": true,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": true,
+              "fk": false,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 60,
+              "widthDataType": 60,
+              "widthDefault": 60
+            }
+          },
+          {
+            "id": "30b25c38-cd21-4a10-99de-156f44e4cdc2",
+            "name": "name",
+            "comment": "",
+            "dataType": "VARCHAR",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": false
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 60,
+              "widthDataType": 60,
+              "widthDefault": 60
+            }
+          },
+          {
+            "id": "09ecf4e3-fdc6-4468-acc8-7cef997b8469",
+            "name": "productTypeId",
+            "comment": "",
+            "dataType": "INT",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": true,
+              "pfk": false,
+              "widthName": 91.25791931152344,
+              "widthComment": 60,
+              "widthDataType": 60,
+              "widthDefault": 60
+            }
+          }
+        ],
+        "ui": {
+          "active": false,
+          "left": 1270.1104,
+          "top": 258.5554,
+          "zIndex": 1,
+          "widthName": 117.0628662109375,
+          "widthComment": 60
+        },
+        "visible": true
+      },
+      {
+        "id": "1b8bed1d-1789-4c15-93f0-4f98a924f655",
+        "name": "nutritional_informations",
+        "comment": "",
+        "columns": [
+          {
+            "id": "87e16efd-5f55-46b6-8557-c7d828bbd768",
+            "name": "id",
+            "comment": "",
+            "dataType": "INT",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": true,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": true,
+              "fk": false,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 60,
+              "widthDataType": 60,
+              "widthDefault": 60
+            }
+          },
+          {
+            "id": "b31508e8-97e9-4cd1-8269-633e6426ebfb",
+            "name": "name",
+            "comment": "",
+            "dataType": "VARCHAR",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 60,
+              "widthDataType": 60,
+              "widthDefault": 60
+            }
+          }
+        ],
+        "ui": {
+          "active": false,
+          "left": 84.6658,
+          "top": 330.555,
+          "zIndex": 26,
+          "widthName": 150.56382751464844,
+          "widthComment": 60
+        },
+        "visible": true
+      },
+      {
+        "id": "1f8ef922-a7ac-41b3-9001-c435b9703a96",
+        "name": "products_nutritional_informations",
+        "comment": "",
+        "columns": [
+          {
+            "id": "f9ffc6df-9f0f-40e8-9666-4fa470a25dbf",
+            "name": "id",
+            "comment": "",
+            "dataType": "int",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": true,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": true,
+              "fk": false,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 60,
+              "widthDataType": 60,
+              "widthDefault": 60
+            }
+          },
+          {
+            "id": "fe720b07-63b4-48be-b55a-fc2a42ac8f6e",
+            "name": "productId",
+            "comment": "",
+            "dataType": "INT",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": true,
+              "pfk": false,
+              "widthName": 62.33294677734375,
+              "widthComment": 60,
+              "widthDataType": 60,
+              "widthDefault": 60
+            }
+          },
+          {
+            "id": "a58a95db-775f-42d0-8ffb-f983ff889e66",
+            "name": "nutritionalInformationId",
+            "comment": "",
+            "dataType": "INT",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": true,
+              "pfk": false,
+              "widthName": 152.0198516845703,
+              "widthComment": 60,
+              "widthDataType": 60,
+              "widthDefault": 60
+            }
+          },
+          {
+            "id": "d40c462f-fb97-4c1d-83a2-fa6142e38eaa",
+            "name": "order",
+            "comment": "",
+            "dataType": "INT",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": false
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 60,
+              "widthDataType": 60,
+              "widthDefault": 60
+            }
+          },
+          {
+            "id": "49462cd2-1eed-4a61-b148-1d14fb537f2b",
+            "name": "quantity",
+            "comment": "",
+            "dataType": "INT",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 60,
+              "widthDataType": 60,
+              "widthDefault": 60
+            }
+          },
+          {
+            "id": "9b2cd7cc-5d3f-4c88-af38-5c82c8105390",
+            "name": "unitsMeasurement",
+            "comment": "",
+            "dataType": "ENUM",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 117.67388916015625,
+              "widthComment": 60,
+              "widthDataType": 60,
+              "widthDefault": 60
+            }
+          },
+          {
+            "id": "5bf4710d-6922-4a7b-bffe-041bcd760029",
+            "name": "percentageDaily",
+            "comment": "",
+            "dataType": "INT",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": false
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 101.47587585449219,
+              "widthComment": 60,
+              "widthDataType": 60,
+              "widthDefault": 60
+            }
+          },
+          {
+            "id": "7dc2d345-eedb-42a5-9a36-6dfcefe4a12e",
+            "name": "nutritionalInformationId",
+            "comment": "",
+            "dataType": "INT",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": false
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 152.0198516845703,
+              "widthComment": 60,
+              "widthDataType": 60,
+              "widthDefault": 60
+            }
+          },
+          {
+            "id": "34168243-6777-47de-981f-f6f8d8f10485",
+            "name": "isSubItem",
+            "comment": "",
+            "dataType": "BOOLEAN",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": false
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 63.33393859863281,
+              "widthComment": 60,
+              "widthDataType": 62.98297119140625,
+              "widthDefault": 60
+            }
+          }
+        ],
+        "ui": {
+          "active": false,
+          "left": 38.2219,
+          "top": 649.7778,
+          "zIndex": 49,
+          "widthName": 210.49375915527344,
+          "widthComment": 60
+        },
+        "visible": true
+      },
+      {
+        "id": "920d2e8f-f756-4d1d-813b-9c868bd97466",
+        "name": "ingredients",
+        "comment": "",
+        "columns": [
+          {
+            "id": "bff25e45-f9d7-4aaa-b7e6-d5ee5fdde590",
+            "name": "id",
+            "comment": "",
+            "dataType": "INT",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": true,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": true,
+              "fk": false,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 60,
+              "widthDataType": 60,
+              "widthDefault": 60
+            }
+          },
+          {
+            "id": "0ab5eec8-7e43-47d5-b489-cef2a593f097",
+            "name": "name",
+            "comment": "",
+            "dataType": "VARCHAR",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 60,
+              "widthDataType": 60,
+              "widthDefault": 60
+            }
+          },
+          {
+            "id": "0ce872ad-c277-4d0c-9f72-4c4f5a690d1f",
+            "name": "description",
+            "comment": "",
+            "dataType": "VARCHAR",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": false
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 70.45790100097656,
+              "widthComment": 60,
+              "widthDataType": 60,
+              "widthDefault": 60
+            }
+          },
+          {
+            "id": "27b0cd2c-94ad-4390-87cc-22b1ab925648",
+            "name": "isSweetener",
+            "comment": "",
+            "dataType": "BOOLEAN",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": false
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 76.35987854003906,
+              "widthComment": 60,
+              "widthDataType": 62.98297119140625,
+              "widthDefault": 60
+            }
+          },
+          {
+            "id": "243db54b-daea-450e-9d72-2124b0abce6d",
+            "name": "isSugar",
+            "comment": "",
+            "dataType": "BOOLEAN",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": false
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 60,
+              "widthDataType": 62.98297119140625,
+              "widthDefault": 60
+            }
+          }
+        ],
+        "ui": {
+          "active": false,
+          "left": 1466.4419,
+          "top": 1169.997,
+          "zIndex": 6,
+          "widthName": 71.45890808105469,
+          "widthComment": 60
+        },
+        "visible": true
+      },
+      {
+        "id": "6b127f80-32e4-467c-9bd8-8778b4997e2c",
+        "name": "flavors",
+        "comment": "",
+        "columns": [
+          {
+            "id": "f753706a-e176-4e44-89ff-dacd06494c91",
+            "name": "id",
+            "comment": "",
+            "dataType": "INT",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": true,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": true,
+              "fk": false,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 60,
+              "widthDataType": 60,
+              "widthDefault": 60
+            }
+          },
+          {
+            "id": "ee57c829-9b2a-490b-b466-378ef78b14ad",
+            "name": "name",
+            "comment": "",
+            "dataType": "VARCHAR",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 60,
+              "widthDataType": 60,
+              "widthDefault": 60
+            }
+          }
+        ],
+        "ui": {
+          "active": false,
+          "left": 1444.7774,
+          "top": 614.4441,
+          "zIndex": 9,
+          "widthName": 60,
+          "widthComment": 60
+        },
+        "visible": true
+      },
+      {
+        "id": "ad83bee2-bf20-4e03-8ef5-1484f526b56f",
+        "name": "products_flavors",
+        "comment": "",
+        "columns": [
+          {
+            "id": "a37a3e0f-116c-492d-92dd-42293612a0bb",
+            "name": "id",
+            "comment": "",
+            "dataType": "INT",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": true,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": true,
+              "fk": false,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 60,
+              "widthDataType": 60,
+              "widthDefault": 60
+            }
+          },
+          {
+            "id": "5634d78a-cfee-4f08-82c8-406605af1d31",
+            "name": "productId",
+            "comment": "",
+            "dataType": "INT",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": true,
+              "pfk": false,
+              "widthName": 62.33294677734375,
+              "widthComment": 60,
+              "widthDataType": 60,
+              "widthDefault": 60
+            }
+          },
+          {
+            "id": "c0585f43-3e38-4c17-8a90-92f68f555270",
+            "name": "flavorId",
+            "comment": "",
+            "dataType": "INT",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": true,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 60,
+              "widthDataType": 60,
+              "widthDefault": 60
+            }
+          },
+          {
+            "id": "7630e66f-23d8-4e2a-a315-709e7bcc58ad",
+            "name": "productNutritionalInformationId",
+            "comment": "",
+            "dataType": "int",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": true,
+              "pfk": false,
+              "widthName": 201.7967987060547,
+              "widthComment": 60,
+              "widthDataType": 60,
+              "widthDefault": 60
+            }
+          }
+        ],
+        "ui": {
+          "active": false,
+          "left": 1374.2188,
+          "top": 864.7774,
+          "zIndex": 4,
+          "widthName": 103.11387634277344,
+          "widthComment": 60
+        },
+        "visible": true
+      },
+      {
+        "id": "1f1edb0b-4086-4ead-aa06-8d77e3e3f547",
+        "name": "ingredients_products_flavors",
+        "comment": "",
+        "columns": [
+          {
+            "id": "a80d3638-d62e-4385-90b8-9ec32852811b",
+            "name": "id",
+            "comment": "",
+            "dataType": "INT",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": true,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": true,
+              "fk": false,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 60,
+              "widthDataType": 60,
+              "widthDefault": 60
+            }
+          },
+          {
+            "id": "13d2280f-f0bc-41bd-90f5-8ac0988d9404",
+            "name": "ingredientId",
+            "comment": "",
+            "dataType": "INT",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": true,
+              "pfk": false,
+              "widthName": 77.6339111328125,
+              "widthComment": 60,
+              "widthDataType": 60,
+              "widthDefault": 60
+            }
+          },
+          {
+            "id": "aeb9f1a7-16c0-4bad-a2a2-744708ef9ccc",
+            "name": "productFlavorId",
+            "comment": "",
+            "dataType": "INT",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": true,
+              "pfk": false,
+              "widthName": 99.56489562988281,
+              "widthComment": 60,
+              "widthDataType": 60,
+              "widthDefault": 60
+            }
+          },
+          {
+            "id": "5eceda41-9ff1-405a-b001-9fcda61c7823",
+            "name": "order",
+            "comment": "",
+            "dataType": "INT",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 60,
+              "widthDataType": 60,
+              "widthDefault": 60
+            }
+          }
+        ],
+        "ui": {
+          "active": false,
+          "left": 764.3333,
+          "top": 1077.2227,
+          "zIndex": 5,
+          "widthName": 178.3447723388672,
+          "widthComment": 60
+        },
+        "visible": true
+      },
+      {
+        "id": "9e61e437-e6a3-4916-9a17-53a5733fd6ee",
+        "name": "stamps",
+        "comment": "",
+        "columns": [
+          {
+            "id": "24166e32-1909-4c67-b42b-ddaf4d2c15f5",
+            "name": "id",
+            "comment": "",
+            "dataType": "INT",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": true,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": true,
+              "fk": false,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 60,
+              "widthDataType": 60,
+              "widthDefault": 60
+            }
+          },
+          {
+            "id": "399a2b2d-4275-4289-9ed3-872369a79984",
+            "name": "name",
+            "comment": "",
+            "dataType": "VARCHAR",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 60,
+              "widthDataType": 60,
+              "widthDefault": 60
+            }
+          }
+        ],
+        "ui": {
+          "active": false,
+          "left": 117.6561,
+          "top": 1103.6871,
+          "zIndex": 24,
+          "widthName": 60,
+          "widthComment": 60
+        },
+        "visible": true
+      }
+    ],
+    "indexes": []
+  },
+  "memo": {
+    "memos": []
+  },
+  "relationship": {
+    "relationships": [
+      {
+        "id": "9af91d2f-faf4-4119-bef2-c59c4898464c",
+        "identification": false,
+        "relationshipType": "OneN",
+        "startRelationshipType": "Ring",
+        "start": {
+          "tableId": "841e5a6b-e3b8-4432-81ff-b6199dcbadd1",
+          "columnIds": [
+            "ea5f2f76-f9c6-46c9-ace1-4b66b9255500"
+          ],
+          "x": 1270.1104,
+          "y": 356.4304,
+          "direction": "left"
+        },
+        "end": {
+          "tableId": "a6d9441d-8ca9-4a7b-b19d-0b2b9cd2b6d5",
+          "columnIds": [
+            "514c890d-cddc-4f62-bcb0-17a0f74543fb"
+          ],
+          "x": 1078.8977891601562,
+          "y": 363.2937,
+          "direction": "right"
+        },
+        "constraintName": "fk_products_subtypes_to_products",
+        "visible": true
+      },
+      {
+        "id": "c2f778bb-1baf-48ed-b842-2ace1675eb68",
+        "identification": false,
+        "relationshipType": "OneN",
+        "startRelationshipType": "Dash",
+        "start": {
+          "tableId": "38ca4f72-8c82-4741-a226-a6768ac6b211",
+          "columnIds": [
+            "08a41cd4-3a6d-4157-af33-4a0b1dc1906a"
+          ],
+          "x": 882.7212,
+          "y": 137.4448,
+          "direction": "bottom"
+        },
+        "end": {
+          "tableId": "a6d9441d-8ca9-4a7b-b19d-0b2b9cd2b6d5",
+          "columnIds": [
+            "8fa25ccd-e86d-4e28-bf03-81681365077b"
+          ],
+          "x": 876.5608445800781,
+          "y": 289.6687,
+          "direction": "top"
+        },
+        "constraintName": "fk_products_types_to_products",
+        "visible": true
+      },
+      {
+        "id": "7f2d2070-f43c-440f-ab0c-6a29899292d0",
+        "identification": false,
+        "relationshipType": "OneN",
+        "startRelationshipType": "Dash",
+        "start": {
+          "tableId": "52e8ca87-8de2-4238-a9f3-75a85afe3ec3",
+          "columnIds": [
+            "7a4b7d56-51ae-49e9-bc80-93393dd997d5"
+          ],
+          "x": 418.98297119140625,
+          "y": 143.5,
+          "direction": "right"
+        },
+        "end": {
+          "tableId": "a6d9441d-8ca9-4a7b-b19d-0b2b9cd2b6d5",
+          "columnIds": [
+            "81067ddc-b614-4587-8e01-1ed61abb66e9"
+          ],
+          "x": 674.2239,
+          "y": 363.2937,
+          "direction": "left"
+        },
+        "constraintName": "fk_companies_to_products",
+        "visible": true
+      },
+      {
+        "id": "4ca2bb58-5335-483e-872a-6772d33619f1",
+        "identification": false,
+        "relationshipType": "OneN",
+        "startRelationshipType": "Dash",
+        "start": {
+          "tableId": "38ca4f72-8c82-4741-a226-a6768ac6b211",
+          "columnIds": [
+            "08a41cd4-3a6d-4157-af33-4a0b1dc1906a"
+          ],
+          "x": 1056.2212,
+          "y": 82.4448,
+          "direction": "right"
+        },
+        "end": {
+          "tableId": "841e5a6b-e3b8-4432-81ff-b6199dcbadd1",
+          "columnIds": [
+            "09ecf4e3-fdc6-4468-acc8-7cef997b8469"
+          ],
+          "x": 1270.1104,
+          "y": 291.1804,
+          "direction": "left"
+        },
+        "constraintName": "fk_products_types_to_products_subtypes",
+        "visible": true
+      },
+      {
+        "id": "5556c8f8-c061-4aa1-a2d5-350cba347d01",
+        "identification": false,
+        "relationshipType": "OneN",
+        "startRelationshipType": "Dash",
+        "start": {
+          "tableId": "a6d9441d-8ca9-4a7b-b19d-0b2b9cd2b6d5",
+          "columnIds": [
+            "1b1f8ac0-b066-47e7-a338-7b66a4de49e4"
+          ],
+          "x": 674.2239,
+          "y": 510.5437,
+          "direction": "left"
+        },
+        "end": {
+          "tableId": "1f8ef922-a7ac-41b3-9001-c435b9703a96",
+          "columnIds": [
+            "fe720b07-63b4-48be-b55a-fc2a42ac8f6e"
+          ],
+          "x": 480.22472287597657,
+          "y": 713.1528,
+          "direction": "right"
+        },
+        "constraintName": "fk_products_to_products_nutritional_informations",
+        "visible": true
+      },
+      {
+        "id": "db7e4d9a-3c6e-4072-9c04-89102810a71d",
+        "identification": false,
+        "relationshipType": "OneN",
+        "startRelationshipType": "Dash",
+        "start": {
+          "tableId": "1b8bed1d-1789-4c15-93f0-4f98a924f655",
+          "columnIds": [
+            "87e16efd-5f55-46b6-8557-c7d828bbd768"
+          ],
+          "x": 258.1658,
+          "y": 440.555,
+          "direction": "bottom"
+        },
+        "end": {
+          "tableId": "1f8ef922-a7ac-41b3-9001-c435b9703a96",
+          "columnIds": [
+            "a58a95db-775f-42d0-8ffb-f983ff889e66"
+          ],
+          "x": 259.2233114379883,
+          "y": 649.7778,
+          "direction": "top"
+        },
+        "constraintName": "fk_nutritional_informations_to_products_nutritional_informations",
+        "visible": true
+      },
+      {
+        "id": "d0311aa1-2e8a-4462-bbe5-22af5502cfa4",
+        "identification": false,
+        "relationshipType": "OneN",
+        "startRelationshipType": "Dash",
+        "start": {
+          "tableId": "a6d9441d-8ca9-4a7b-b19d-0b2b9cd2b6d5",
+          "columnIds": [
+            "1b1f8ac0-b066-47e7-a338-7b66a4de49e4"
+          ],
+          "x": 1078.8977891601562,
+          "y": 510.5437,
+          "direction": "right"
+        },
+        "end": {
+          "tableId": "ad83bee2-bf20-4e03-8ef5-1484f526b56f",
+          "columnIds": [
+            "5634d78a-cfee-4f08-82c8-406605af1d31"
+          ],
+          "x": 1374.2188,
+          "y": 889.9440666666667,
+          "direction": "left"
+        },
+        "constraintName": "fk_products_to_products_flavors",
+        "visible": true
+      },
+      {
+        "id": "93438f7b-43b7-4b5c-b3ea-c59554cb8a80",
+        "identification": false,
+        "relationshipType": "OneN",
+        "startRelationshipType": "Dash",
+        "start": {
+          "tableId": "6b127f80-32e4-467c-9bd8-8778b4997e2c",
+          "columnIds": [
+            "f753706a-e176-4e44-89ff-dacd06494c91"
+          ],
+          "x": 1618.2774,
+          "y": 724.4441,
+          "direction": "bottom"
+        },
+        "end": {
+          "tableId": "ad83bee2-bf20-4e03-8ef5-1484f526b56f",
+          "columnIds": [
+            "c0585f43-3e38-4c17-8a90-92f68f555270"
+          ],
+          "x": 1618.6171993530274,
+          "y": 864.7774,
+          "direction": "top"
+        },
+        "constraintName": "fk_flavors_to_products_flavors",
+        "visible": true
+      },
+      {
+        "id": "6dce9d8c-b1c0-468a-813d-fa6b984483c7",
+        "identification": false,
+        "relationshipType": "OneN",
+        "startRelationshipType": "Dash",
+        "start": {
+          "tableId": "920d2e8f-f756-4d1d-813b-9c868bd97466",
+          "columnIds": [
+            "bff25e45-f9d7-4aaa-b7e6-d5ee5fdde590"
+          ],
+          "x": 1466.4419,
+          "y": 1255.747,
+          "direction": "left"
+        },
+        "end": {
+          "tableId": "1f1edb0b-4086-4ead-aa06-8d77e3e3f547",
+          "columnIds": [
+            "13d2280f-f0bc-41bd-90f5-8ac0988d9404"
+          ],
+          "x": 1150.8981956298828,
+          "y": 1190.4727,
+          "direction": "right"
+        },
+        "constraintName": "fk_ingredients_to_ingredients_products_flavors",
+        "visible": true
+      },
+      {
+        "id": "8732df76-2abd-40b2-b182-df4e089db3a9",
+        "identification": false,
+        "relationshipType": "OneN",
+        "startRelationshipType": "Dash",
+        "start": {
+          "tableId": "ad83bee2-bf20-4e03-8ef5-1484f526b56f",
+          "columnIds": [
+            "a37a3e0f-116c-492d-92dd-42293612a0bb"
+          ],
+          "x": 1374.2188,
+          "y": 990.6107333333334,
+          "direction": "left"
+        },
+        "end": {
+          "tableId": "1f1edb0b-4086-4ead-aa06-8d77e3e3f547",
+          "columnIds": [
+            "aeb9f1a7-16c0-4bad-a2a2-744708ef9ccc"
+          ],
+          "x": 1150.8981956298828,
+          "y": 1114.9727,
+          "direction": "right"
+        },
+        "constraintName": "fk_products_flavors_to_ingredients_products_flavors",
+        "visible": true
+      },
+      {
+        "id": "13204f4f-1512-4e66-a44a-c06f06818400",
+        "identification": false,
+        "relationshipType": "OneN",
+        "startRelationshipType": "Dash",
+        "start": {
+          "tableId": "1f8ef922-a7ac-41b3-9001-c435b9703a96",
+          "columnIds": [
+            "f9ffc6df-9f0f-40e8-9666-4fa470a25dbf"
+          ],
+          "x": 480.22472287597657,
+          "y": 839.9028,
+          "direction": "right"
+        },
+        "end": {
+          "tableId": "ad83bee2-bf20-4e03-8ef5-1484f526b56f",
+          "columnIds": [
+            "7630e66f-23d8-4e2a-a315-709e7bcc58ad"
+          ],
+          "x": 1374.2188,
+          "y": 940.2774000000001,
+          "direction": "left"
+        },
+        "constraintName": "fk_products_nutritional_informations_to_products_flavors",
+        "visible": true
+      },
+      {
+        "id": "2111b25d-35e6-4062-8dec-d34f4b96456a",
+        "identification": false,
+        "relationshipType": "OneN",
+        "startRelationshipType": "Ring",
+        "start": {
+          "tableId": "9e61e437-e6a3-4916-9a17-53a5733fd6ee",
+          "columnIds": [
+            "24166e32-1909-4c67-b42b-ddaf4d2c15f5"
+          ],
+          "x": 464.6561,
+          "y": 1158.6871,
+          "direction": "right"
+        },
+        "end": {
+          "tableId": "a6d9441d-8ca9-4a7b-b19d-0b2b9cd2b6d5",
+          "columnIds": [
+            "3f98048c-b6d1-43d6-8f82-27a79e490e08"
+          ],
+          "x": 876.5608445800781,
+          "y": 584.1687,
+          "direction": "bottom"
+        },
+        "constraintName": "fk_stamps_to_products",
+        "visible": true
+      }
+    ]
+  }
+}
