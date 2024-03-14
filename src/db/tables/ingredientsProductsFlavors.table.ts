@@ -1,0 +1,26 @@
+import { BaseTable } from "../baseTable";
+import { IngredientsTable } from "./ingredients.table";
+import { ProductsFlavorsTable } from "./productsFlavors.table";
+
+export class IngredientsProductsFlavorsTable extends BaseTable {
+  readonly table = "ingredientsProductsFlavors ";
+  columns = this.setColumns((t) => ({
+    id: t.identity().primaryKey(),
+    ingredientId: t.integer().foreignKey("ingredients", "id"),
+    productFlavorId: t.integer().foreignKey("productsFlavors", "id"),
+    order: t.integer(),
+    createdAt: t.timestampNoTZ().default(t.sql("now()")),
+    updatedAt: t.timestampNoTZ().default("now()"),
+  }));
+
+  relations = {
+    ingredients: this.belongsTo(() => IngredientsTable, {
+      columns: ["ingredientId"],
+      references: ["id"],
+    }),
+    productsFlavors: this.belongsTo(() => ProductsFlavorsTable, {
+      columns: ["productFlavorId"],
+      references: ["id"],
+    }),
+  };
+}
