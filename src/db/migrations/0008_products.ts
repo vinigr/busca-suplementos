@@ -15,6 +15,7 @@ change(async (db) => {
     capsules: t.integer().nullable(),
     unitsMeasurement: t.integer(),
     stampId: t.integer().foreignKey("stamps", "id").nullable(),
+    link: t.varchar(),
     urlImage: t.varchar().nullable(),
     ...t.timestampsNoTZ(),
   }));
