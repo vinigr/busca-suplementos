@@ -1,8 +1,9 @@
 import { Elysia, t } from "elysia";
-import { companiesRoutes } from "./db/routes/companies";
-import { authRoutes } from "./db/routes/auth";
-import { config } from "./db/config";
+import { companiesRoutes } from "./routes/companies";
+import { authRoutes } from "./routes/auth";
+import { config } from "./config";
 import bearer from "@elysiajs/bearer";
+import { flavorsRoutes } from "./routes/flavors";
 
 const app = new Elysia()
   .use(authRoutes)
@@ -23,7 +24,7 @@ const app = new Elysia()
           }
         },
       },
-      (app) => app.use(companiesRoutes)
+      (app) => app.use(companiesRoutes).use(flavorsRoutes)
     );
   })
   .get("/", () => "Hello Elysia")

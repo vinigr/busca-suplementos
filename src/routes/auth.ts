@@ -1,6 +1,6 @@
 import { password } from "bun";
 import Elysia, { t } from "elysia";
-import { db } from "../db";
+import { db } from "../db/db";
 import jwt from "@elysiajs/jwt";
 import { config } from "../config";
 

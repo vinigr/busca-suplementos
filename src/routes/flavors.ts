@@ -1,12 +1,12 @@
 import { Elysia, t } from "elysia";
-import { db } from "../db";
+import { db } from "../db/db";
 
-export const companiesRoutes = new Elysia({ prefix: "/companies" })
+export const flavorsRoutes = new Elysia({ prefix: "/flavors" })
   .get(
     "/",
     async ({ query: { page, size, search } }) => {
-      let query = db.companies
-        .select("id", "name", "active")
+      let query = db.flavors
+        .select("id", "name")
         .limit(Number(size))
         .offset((Number(page) - 1) * Number(size));
 
@@ -14,23 +14,23 @@ export const companiesRoutes = new Elysia({ prefix: "/companies" })
         query = query.where({ name: { contains: String(search) } });
       }
 
-      const categories = await query;
+      const flavors = await query;
 
-      let countCategories = db.products.count();
+      let countFlavors = db.products.count();
 
       if (search) {
-        countCategories = countCategories.where({
+        countFlavors = countFlavors.where({
           name: { contains: String(search) },
         });
       }
 
-      const resultCountCategories = await countCategories;
+      const resultCountFlavors = await countFlavors;
 
-      const pageCount = Math.ceil(resultCountCategories / Number(size));
+      const pageCount = Math.ceil(resultCountFlavors / Number(size));
 
       return {
-        data: categories,
-        total: resultCountCategories,
+        data: flavors,
+        total: resultCountFlavors,
         page,
         pageCount,
       };
@@ -46,7 +46,7 @@ export const companiesRoutes = new Elysia({ prefix: "/companies" })
   .post(
     "/",
     async ({ body }) => {
-      return await db.companies.insert({ name: body.name });
+      return await db.flavors.insert({ name: body.name });
     },
     {
       body: t.Object({
@@ -57,7 +57,7 @@ export const companiesRoutes = new Elysia({ prefix: "/companies" })
   .put(
     "/:id",
     async ({ body, params: { id } }) => {
-      return await db.companies.where({ id }).update({ name: body.name });
+      return await db.flavors.where({ id }).update({ name: body.name });
     },
     {
       params: t.Object({
@@ -71,9 +71,7 @@ export const companiesRoutes = new Elysia({ prefix: "/companies" })
   .get(
     "/:id",
     async ({ params: { id } }) => {
-      return await db.companies
-        .findByOptional({ id })
-        .select("id", "name", "active", "urlImage");
+      return await db.flavors.findByOptional({ id }).select("id", "name");
     },
     {
       params: t.Object({
