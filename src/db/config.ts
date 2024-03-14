@@ -1,9 +1,9 @@
-import 'dotenv/config';
+import "dotenv/config";
 
 const database = {
   databaseURL: process.env.DATABASE_URL,
 };
-if (!database.databaseURL) throw new Error('DATABASE_URL is missing in .env');
+if (!database.databaseURL) throw new Error("DATABASE_URL is missing in .env");
 
 const testDatabase = {
   databaseURL: process.env.DATABASE_TEST_URL,
@@ -17,5 +17,7 @@ if (testDatabase.databaseURL) {
 
 export const config = {
   allDatabases,
-  database: process.env.NODE_ENV === 'test' ? testDatabase : database,
+  database: process.env.NODE_ENV === "test" ? testDatabase : database,
+  port: process.env.PORT || 4890,
+  jwtToken: process.env.JWT_TOKEN || "",
 };

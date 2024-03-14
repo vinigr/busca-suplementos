@@ -8,8 +8,10 @@
     "db": "bun src/db/dbScript.ts"
   },
   "dependencies": {
-    "elysia": "latest",
+    "@elysiajs/bearer": "^0.8.0",
+    "@elysiajs/jwt": "^0.8.0",
     "dotenv": "^16.4.5",
+    "elysia": "latest",
     "orchid-orm": "^1.23.4",
     "orchid-orm-valibot": "^0.0.3",
     "valibot": "^0.30.0"
