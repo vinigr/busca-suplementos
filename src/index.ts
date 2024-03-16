@@ -5,6 +5,7 @@ import { config } from "./config";
 import bearer from "@elysiajs/bearer";
 import { flavorsRoutes } from "./routes/flavors";
 import cors from "@elysiajs/cors";
+import { productsTypesRoutes } from "./routes/productsTypes";
 
 const app = new Elysia()
   .use(cors({ methods: "*" }))
@@ -26,7 +27,8 @@ const app = new Elysia()
           }
         },
       },
-      (app) => app.use(companiesRoutes).use(flavorsRoutes)
+      (app) =>
+        app.use(companiesRoutes).use(flavorsRoutes).use(productsTypesRoutes)
     );
   })
   .get("/", () => "Hello Elysia")
