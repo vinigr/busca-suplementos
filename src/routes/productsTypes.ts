@@ -81,4 +81,53 @@ export const productsTypesRoutes = new Elysia({ prefix: "/products-types" })
         id: t.Numeric(),
       }),
     }
+  )
+  .get("/list", async () => {
+    return await db.productsTypes.select("id", "name").order("id");
+  })
+  .get(
+    "/:id/subtypes",
+    async ({ params: { id }, query: { page, size, search } }) => {
+      let query = db.productsSubtypes
+        .select("id", "name")
+        .where({ productTypeId: id })
+        .limit(Number(size))
+        .order("id")
+        .offset((Number(page) - 1) * Number(size));
+
+      if (search) {
+        query = query.where({ name: { contains: String(search) } });
+      }
+
+      const productsSubtypes = await query;
+
+      let countProductsSubtypes = db.productsSubtypes.count();
+
+      if (search) {
+        countProductsSubtypes = countProductsSubtypes.where({
+          name: { contains: String(search) },
+        });
+      }
+
+      const resultCountProductsSubtypes = await countProductsSubtypes;
+
+      const pageCount = Math.ceil(resultCountProductsSubtypes / Number(size));
+
+      return {
+        data: productsSubtypes,
+        total: resultCountProductsSubtypes,
+        page,
+        pageCount,
+      };
+    },
+    {
+      params: t.Object({
+        id: t.Numeric(),
+      }),
+      query: t.Object({
+        page: t.Numeric({ default: 1 }),
+        size: t.Numeric({ default: 1 }),
+        search: t.Optional(t.String()),
+      }),
+    }
   );
