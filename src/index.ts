@@ -7,7 +7,7 @@ import { flavorsRoutes } from "./routes/flavors";
 import cors from "@elysiajs/cors";
 
 const app = new Elysia()
-  .use(cors())
+  .use(cors({ methods: "*" }))
   .use(authRoutes)
   .group("/admin", (app) => {
     return app.use(bearer()).guard(

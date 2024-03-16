@@ -1,5 +1,6 @@
 import { Elysia, t } from "elysia";
 import { db } from "../db/db";
+import { generateRandomString } from "../helpers/generateRandomString";
 
 export const companiesRoutes = new Elysia({ prefix: "/companies" })
   .get(
@@ -57,7 +58,9 @@ export const companiesRoutes = new Elysia({ prefix: "/companies" })
   .put(
     "/:id",
     async ({ body, params: { id } }) => {
-      return await db.companies.where({ id }).update({ name: body.name });
+      return await db.companies
+        .where({ id })
+        .update({ name: body.name, active: body.active });
     },
     {
       params: t.Object({
@@ -65,6 +68,26 @@ export const companiesRoutes = new Elysia({ prefix: "/companies" })
       }),
       body: t.Object({
         name: t.String({ error: "O nome é obrigatório" }),
+        active: t.Boolean(),
+      }),
+    }
+  )
+  .post(
+    "/:id/upload",
+    async ({ body, params: { id } }) => {
+      const nameFile = `${generateRandomString(12)}.png`;
+
+      const path = `./public/companies/${nameFile}`;
+      await Bun.write(path, body.image);
+
+      return await db.companies.where({ id }).update({ urlImage: nameFile });
+    },
+    {
+      params: t.Object({
+        id: t.Numeric(),
+      }),
+      body: t.Object({
+        image: t.File(),
       }),
     }
   )
