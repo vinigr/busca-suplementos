@@ -3,8 +3,8 @@
     "version": "2.2.13",
     "width": 2000,
     "height": 2000,
-    "scrollTop": -186.26079999999968,
-    "scrollLeft": -380,
+    "scrollTop": -177.26079999999968,
+    "scrollLeft": -68,
     "zoomLevel": 0.9,
     "show": {
       "tableComment": true,
@@ -403,8 +403,8 @@
           },
           {
             "id": "89962c6c-e3a1-42c5-8f82-4da67ce636b7",
-            "name": "unitsMeasurement",
-            "comment": "1 - weight / 2 - capsules",
+            "name": "form",
+            "comment": "",
             "dataType": "ENUM",
             "default": "",
             "option": {
@@ -418,8 +418,8 @@
               "pk": false,
               "fk": false,
               "pfk": false,
-              "widthName": 117.67388916015625,
-              "widthComment": 120,
+              "widthName": 60,
+              "widthComment": 60,
               "widthDataType": 60,
               "widthDefault": 60
             }
@@ -475,7 +475,7 @@
           "active": true,
           "left": 674.2239,
           "top": 289.6687,
-          "zIndex": 17,
+          "zIndex": 19,
           "widthName": 60,
           "widthComment": 60
         },
@@ -620,9 +620,9 @@
         ],
         "ui": {
           "active": false,
-          "left": 91.3322,
-          "top": 312.7779,
-          "zIndex": 9,
+          "left": 44.6656,
+          "top": 297.2225,
+          "zIndex": 8,
           "widthName": 150.56382751464844,
           "widthComment": 60
         },
@@ -839,13 +839,36 @@
               "widthDataType": 62.98297119140625,
               "widthDefault": 60
             }
+          },
+          {
+            "id": "a0fbbc7e-851a-441f-81fe-ac253345bd47",
+            "name": "productNutritionalInformationGroupId",
+            "comment": "",
+            "dataType": "int",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": true,
+              "pfk": false,
+              "widthName": 240.26376342773438,
+              "widthComment": 60,
+              "widthDataType": 60,
+              "widthDefault": 60
+            }
           }
         ],
         "ui": {
           "active": false,
-          "left": 38.2219,
-          "top": 649.7778,
-          "zIndex": 7,
+          "left": 3.7776,
+          "top": 633.1113,
+          "zIndex": 17,
           "widthName": 210.49375915527344,
           "widthComment": 60
         },
@@ -976,7 +999,7 @@
           "active": false,
           "left": 1466.4419,
           "top": 1169.997,
-          "zIndex": 8,
+          "zIndex": 6,
           "widthName": 71.45890808105469,
           "widthComment": 60
         },
@@ -1254,7 +1277,7 @@
           "active": false,
           "left": 764.3333,
           "top": 1077.2227,
-          "zIndex": 15,
+          "zIndex": 7,
           "widthName": 178.3447723388672,
           "widthComment": 60
         },
@@ -1314,10 +1337,95 @@
         ],
         "ui": {
           "active": false,
-          "left": 117.6561,
-          "top": 1103.6871,
-          "zIndex": 6,
+          "left": 322.0996,
+          "top": 1088.1317,
+          "zIndex": 9,
           "widthName": 60,
+          "widthComment": 60
+        },
+        "visible": true
+      },
+      {
+        "id": "7711d43e-ca4d-4517-8272-74417b1c5af9",
+        "name": "products_nutritional_informations_groups",
+        "comment": "",
+        "columns": [
+          {
+            "id": "b97e1ad3-bcc8-4438-ae13-57a21f9e06c0",
+            "name": "id",
+            "comment": "",
+            "dataType": "int",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": true,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": true,
+              "fk": false,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 60,
+              "widthDataType": 60,
+              "widthDefault": 60
+            }
+          },
+          {
+            "id": "e6e4a37f-863f-4322-a7fb-a14b13dea359",
+            "name": "name",
+            "comment": "",
+            "dataType": "VARCHAR",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 60,
+              "widthDataType": 60,
+              "widthDefault": 60
+            }
+          },
+          {
+            "id": "84c96328-4616-4771-9a31-1e150a9272e3",
+            "name": "productId",
+            "comment": "",
+            "dataType": "INT",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": true,
+              "pfk": false,
+              "widthName": 62.33294677734375,
+              "widthComment": 60,
+              "widthDataType": 60,
+              "widthDefault": 60
+            }
+          }
+        ],
+        "ui": {
+          "active": false,
+          "left": 877.9981,
+          "top": 682.927,
+          "zIndex": 12,
+          "widthName": 259.49072265625,
           "widthComment": 60
         },
         "visible": true
@@ -1349,7 +1457,7 @@
           "columnIds": [
             "514c890d-cddc-4f62-bcb0-17a0f74543fb"
           ],
-          "x": 1138.8977891601562,
+          "x": 1052.4818193115234,
           "y": 363.2937,
           "direction": "right"
         },
@@ -1375,7 +1483,7 @@
           "columnIds": [
             "8fa25ccd-e86d-4e28-bf03-81681365077b"
           ],
-          "x": 906.5608445800781,
+          "x": 863.3528596557617,
           "y": 289.6687,
           "direction": "top"
         },
@@ -1453,8 +1561,8 @@
           "columnIds": [
             "fe720b07-63b4-48be-b55a-fc2a42ac8f6e"
           ],
-          "x": 480.22472287597657,
-          "y": 713.1528,
+          "x": 534.0243346191406,
+          "y": 678.7779666666668,
           "direction": "right"
         },
         "constraintName": "fk_products_to_products_nutritional_informations",
@@ -1470,8 +1578,8 @@
           "columnIds": [
             "87e16efd-5f55-46b6-8557-c7d828bbd768"
           ],
-          "x": 264.8322,
-          "y": 422.7779,
+          "x": 218.16559999999998,
+          "y": 407.2225,
           "direction": "bottom"
         },
         "end": {
@@ -1479,8 +1587,8 @@
           "columnIds": [
             "a58a95db-775f-42d0-8ffb-f983ff889e66"
           ],
-          "x": 259.2233114379883,
-          "y": 649.7778,
+          "x": 268.9009673095703,
+          "y": 633.1113,
           "direction": "top"
         },
         "constraintName": "fk_nutritional_informations_to_products_nutritional_informations",
@@ -1496,7 +1604,7 @@
           "columnIds": [
             "1b1f8ac0-b066-47e7-a338-7b66a4de49e4"
           ],
-          "x": 1138.8977891601562,
+          "x": 1052.4818193115234,
           "y": 510.5437,
           "direction": "right"
         },
@@ -1600,8 +1708,8 @@
           "columnIds": [
             "f9ffc6df-9f0f-40e8-9666-4fa470a25dbf"
           ],
-          "x": 480.22472287597657,
-          "y": 839.9028,
+          "x": 534.0243346191406,
+          "y": 861.4446333333335,
           "direction": "right"
         },
         "end": {
@@ -1626,8 +1734,8 @@
           "columnIds": [
             "24166e32-1909-4c67-b42b-ddaf4d2c15f5"
           ],
-          "x": 464.6561,
-          "y": 1158.6871,
+          "x": 669.0996,
+          "y": 1143.1317,
           "direction": "right"
         },
         "end": {
@@ -1635,11 +1743,63 @@
           "columnIds": [
             "3f98048c-b6d1-43d6-8f82-27a79e490e08"
           ],
-          "x": 906.5608445800781,
+          "x": 768.7883798278808,
           "y": 584.1687,
           "direction": "bottom"
         },
         "constraintName": "fk_stamps_to_products",
+        "visible": true
+      },
+      {
+        "id": "3f64f64a-14c5-4b63-8629-8419a1fe11a8",
+        "identification": false,
+        "relationshipType": "OneN",
+        "startRelationshipType": "Dash",
+        "start": {
+          "tableId": "7711d43e-ca4d-4517-8272-74417b1c5af9",
+          "columnIds": [
+            "b97e1ad3-bcc8-4438-ae13-57a21f9e06c0"
+          ],
+          "x": 877.9981,
+          "y": 780.802,
+          "direction": "left"
+        },
+        "end": {
+          "tableId": "1f8ef922-a7ac-41b3-9001-c435b9703a96",
+          "columnIds": [
+            "a0fbbc7e-851a-441f-81fe-ac253345bd47"
+          ],
+          "x": 534.0243346191406,
+          "y": 770.1113000000001,
+          "direction": "right"
+        },
+        "constraintName": "fk_products_nutritional_informations_groups_to_products_nutritional_informations",
+        "visible": true
+      },
+      {
+        "id": "3f04c792-b2ee-41db-8a7e-b10d2b6ccd60",
+        "identification": false,
+        "relationshipType": "OneN",
+        "startRelationshipType": "Dash",
+        "start": {
+          "tableId": "a6d9441d-8ca9-4a7b-b19d-0b2b9cd2b6d5",
+          "columnIds": [
+            "1b1f8ac0-b066-47e7-a338-7b66a4de49e4"
+          ],
+          "x": 957.9173394836425,
+          "y": 584.1687,
+          "direction": "bottom"
+        },
+        "end": {
+          "tableId": "7711d43e-ca4d-4517-8272-74417b1c5af9",
+          "columnIds": [
+            "84c96328-4616-4771-9a31-1e150a9272e3"
+          ],
+          "x": 877.9981,
+          "y": 715.552,
+          "direction": "left"
+        },
+        "constraintName": "fk_products_to_products_nutritional_informations_groups",
         "visible": true
       }
     ]

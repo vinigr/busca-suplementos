@@ -8,6 +8,7 @@ import { cors } from "@elysiajs/cors";
 import { productsTypesAdminRoutes } from "./routes/admin/productsTypes";
 import { stampsAdminRoutes } from "./routes/admin/stamps";
 import { productsSubtypesAdminRoutes } from "./routes/admin/productsSubtypes";
+import { productsAdminRoutes } from "./routes/admin/products";
 
 const app = new Elysia()
   .use(cors({ methods: "*" }))
@@ -36,7 +37,10 @@ const app = new Elysia()
           .use(productsTypesAdminRoutes)
           .use(stampsAdminRoutes)
           .use(productsSubtypesAdminRoutes)
+          .use(productsAdminRoutes)
           .onError(({ error }) => {
+            console.log(error);
+
             return { message: error.message };
           })
     );

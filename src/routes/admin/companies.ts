@@ -103,4 +103,7 @@ export const companiesAdminRoutes = new Elysia({ prefix: "/companies" })
         id: t.Numeric(),
       }),
     }
-  );
+  )
+  .get("/list", async () => {
+    return await db.companies.select("id", "name").order("name");
+  });

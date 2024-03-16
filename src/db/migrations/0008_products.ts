@@ -13,9 +13,9 @@ change(async (db) => {
     portion: t.integer().nullable(),
     weigth: t.integer().nullable(),
     capsules: t.integer().nullable(),
-    unitsMeasurement: t.integer(),
+    form: t.integer(),
     stampId: t.integer().foreignKey("stamps", "id").nullable(),
-    link: t.varchar(),
+    link: t.varchar().nullable(),
     urlImage: t.varchar().nullable(),
     ...t.timestampsNoTZ(),
   }));

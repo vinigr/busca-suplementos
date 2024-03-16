@@ -5,6 +5,7 @@ import { CompaniesTable } from "./companies.table";
 import { StampsTable } from "./stamps.table";
 import { ProductsNutritionalInformationsTable } from "./productsNutritionalInformations.table";
 import { ProductsFlavorsTable } from "./productsFlavors.table";
+import { ProductsNutritionalInformationsGroupsTable } from "./productsNutritionalInformationsGroups.table";
 
 export class ProductsTable extends BaseTable {
   readonly table = "products";
@@ -20,9 +21,10 @@ export class ProductsTable extends BaseTable {
     portion: t.integer().nullable(),
     weigth: t.integer().nullable(),
     capsules: t.integer().nullable(),
-    unitsMeasurement: t.integer(),
+    form: t.integer(),
     stampId: t.integer().foreignKey("stamps", "id").nullable(),
     urlImage: t.varchar().nullable(),
+    link: t.varchar().nullable(),
     createdAt: t.timestampNoTZ().default(t.sql("now()")),
     updatedAt: t.timestampNoTZ().default("now()"),
   }));
@@ -55,5 +57,12 @@ export class ProductsTable extends BaseTable {
       columns: ["id"],
       references: ["productId"],
     }),
+    productsNutritionalInformationsGroups: this.hasMany(
+      () => ProductsNutritionalInformationsGroupsTable,
+      {
+        columns: ["id"],
+        references: ["productId"],
+      }
+    ),
   };
 }
