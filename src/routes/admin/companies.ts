@@ -1,8 +1,8 @@
 import { Elysia, t } from "elysia";
-import { db } from "../db/db";
-import { generateRandomString } from "../helpers/generateRandomString";
+import { db } from "../../db/db";
+import { generateRandomString } from "../../helpers/generateRandomString";
 
-export const companiesRoutes = new Elysia({ prefix: "/companies" })
+export const companiesAdminRoutes = new Elysia({ prefix: "/companies" })
   .get(
     "/",
     async ({ query: { page, size, search } }) => {

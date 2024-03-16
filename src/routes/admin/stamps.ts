@@ -1,36 +1,37 @@
 import { Elysia, t } from "elysia";
-import { db } from "../db/db";
+import { db } from "../../db/db";
 
-export const flavorsRoutes = new Elysia({ prefix: "/flavors" })
+export const stampsAdminRoutes = new Elysia({ prefix: "/stamps" })
   .get(
     "/",
     async ({ query: { page, size, search } }) => {
-      let query = db.flavors
+      let query = db.stamps
         .select("id", "name")
         .limit(Number(size))
+        .order("id")
         .offset((Number(page) - 1) * Number(size));
 
       if (search) {
         query = query.where({ name: { contains: String(search) } });
       }
 
-      const flavors = await query;
+      const stamps = await query;
 
-      let countFlavors = db.flavors.count();
+      let countStamps = db.stamps.count();
 
       if (search) {
-        countFlavors = countFlavors.where({
+        countStamps = countStamps.where({
           name: { contains: String(search) },
         });
       }
 
-      const resultCountFlavors = await countFlavors;
+      const resultCountStamps = await countStamps;
 
-      const pageCount = Math.ceil(resultCountFlavors / Number(size));
+      const pageCount = Math.ceil(resultCountStamps / Number(size));
 
       return {
-        data: flavors,
-        total: resultCountFlavors,
+        data: stamps,
+        total: resultCountStamps,
         page,
         pageCount,
       };
@@ -46,7 +47,7 @@ export const flavorsRoutes = new Elysia({ prefix: "/flavors" })
   .post(
     "/",
     async ({ body }) => {
-      return await db.flavors.insert({ name: body.name });
+      return await db.stamps.insert({ name: body.name.trim() });
     },
     {
       body: t.Object({
@@ -57,7 +58,7 @@ export const flavorsRoutes = new Elysia({ prefix: "/flavors" })
   .put(
     "/:id",
     async ({ body, params: { id } }) => {
-      return await db.flavors.where({ id }).update({ name: body.name });
+      return await db.stamps.where({ id }).update({ name: body.name.trim() });
     },
     {
       params: t.Object({
@@ -71,7 +72,7 @@ export const flavorsRoutes = new Elysia({ prefix: "/flavors" })
   .get(
     "/:id",
     async ({ params: { id } }) => {
-      return await db.flavors.findByOptional({ id }).select("id", "name");
+      return await db.stamps.findByOptional({ id }).select("id", "name");
     },
     {
       params: t.Object({

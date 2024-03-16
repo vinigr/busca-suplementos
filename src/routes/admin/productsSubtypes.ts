@@ -1,7 +1,7 @@
 import { Elysia, t } from "elysia";
-import { db } from "../db/db";
+import { db } from "../../db/db";
 
-export const productsSubtypesRoutes = new Elysia({
+export const productsSubtypesAdminRoutes = new Elysia({
   prefix: "/products-subtypes",
 })
   .post(

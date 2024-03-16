@@ -1,7 +1,9 @@
 import { Elysia, t } from "elysia";
-import { db } from "../db/db";
+import { db } from "../../db/db";
 
-export const productsTypesRoutes = new Elysia({ prefix: "/products-types" })
+export const productsTypesAdminRoutes = new Elysia({
+  prefix: "/products-types",
+})
   .get(
     "/",
     async ({ query: { page, size, search } }) => {

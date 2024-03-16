@@ -1,10 +1,10 @@
 import { password } from "bun";
 import Elysia, { t } from "elysia";
-import { db } from "../db/db";
+import { db } from "../../db/db";
 import { jwt } from "@elysiajs/jwt";
-import { config } from "../config";
+import { config } from "../../config";
 
-export const authRoutes = new Elysia()
+export const authAdminRoutes = new Elysia()
   .use(
     jwt({
       name: "jwt",

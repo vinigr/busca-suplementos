@@ -3,9 +3,9 @@
     "version": "2.2.13",
     "width": 2000,
     "height": 2000,
-    "scrollTop": -660.2664000000001,
-    "scrollLeft": -725.2118000000004,
-    "zoomLevel": 0.2,
+    "scrollTop": -186.26079999999968,
+    "scrollLeft": -380,
+    "zoomLevel": 0.9,
     "show": {
       "tableComment": true,
       "columnComment": true,
@@ -98,7 +98,7 @@
           "active": false,
           "left": 709.2212,
           "top": 27.4448,
-          "zIndex": 5,
+          "zIndex": 4,
           "widthName": 94.806884765625,
           "widthComment": 60
         },
@@ -206,7 +206,7 @@
           "active": false,
           "left": 69,
           "top": 68,
-          "zIndex": 3,
+          "zIndex": 2,
           "widthName": 68.49493408203125,
           "widthComment": 60
         },
@@ -404,7 +404,7 @@
           {
             "id": "89962c6c-e3a1-42c5-8f82-4da67ce636b7",
             "name": "unitsMeasurement",
-            "comment": "",
+            "comment": "1 - weight / 2 - capsules",
             "dataType": "ENUM",
             "default": "",
             "option": {
@@ -419,7 +419,7 @@
               "fk": false,
               "pfk": false,
               "widthName": 117.67388916015625,
-              "widthComment": 60,
+              "widthComment": 120,
               "widthDataType": 60,
               "widthDefault": 60
             }
@@ -472,10 +472,10 @@
           }
         ],
         "ui": {
-          "active": false,
+          "active": true,
           "left": 674.2239,
           "top": 289.6687,
-          "zIndex": 14,
+          "zIndex": 17,
           "widthName": 60,
           "widthComment": 60
         },
@@ -622,7 +622,7 @@
           "active": false,
           "left": 91.3322,
           "top": 312.7779,
-          "zIndex": 11,
+          "zIndex": 9,
           "widthName": 150.56382751464844,
           "widthComment": 60
         },
@@ -845,7 +845,7 @@
           "active": false,
           "left": 38.2219,
           "top": 649.7778,
-          "zIndex": 8,
+          "zIndex": 7,
           "widthName": 210.49375915527344,
           "widthComment": 60
         },
@@ -976,7 +976,7 @@
           "active": false,
           "left": 1466.4419,
           "top": 1169.997,
-          "zIndex": 9,
+          "zIndex": 8,
           "widthName": 71.45890808105469,
           "widthComment": 60
         },
@@ -1038,7 +1038,7 @@
           "active": false,
           "left": 1444.7774,
           "top": 614.4441,
-          "zIndex": 6,
+          "zIndex": 5,
           "widthName": 60,
           "widthComment": 60
         },
@@ -1146,7 +1146,7 @@
           "active": false,
           "left": 1374.2188,
           "top": 864.7774,
-          "zIndex": 4,
+          "zIndex": 3,
           "widthName": 103.11387634277344,
           "widthComment": 60
         },
@@ -1254,7 +1254,7 @@
           "active": false,
           "left": 764.3333,
           "top": 1077.2227,
-          "zIndex": 21,
+          "zIndex": 15,
           "widthName": 178.3447723388672,
           "widthComment": 60
         },
@@ -1316,7 +1316,7 @@
           "active": false,
           "left": 117.6561,
           "top": 1103.6871,
-          "zIndex": 7,
+          "zIndex": 6,
           "widthName": 60,
           "widthComment": 60
         },
@@ -1349,7 +1349,7 @@
           "columnIds": [
             "514c890d-cddc-4f62-bcb0-17a0f74543fb"
           ],
-          "x": 1078.8977891601562,
+          "x": 1138.8977891601562,
           "y": 363.2937,
           "direction": "right"
         },
@@ -1375,7 +1375,7 @@
           "columnIds": [
             "8fa25ccd-e86d-4e28-bf03-81681365077b"
           ],
-          "x": 876.5608445800781,
+          "x": 906.5608445800781,
           "y": 289.6687,
           "direction": "top"
         },
@@ -1496,7 +1496,7 @@
           "columnIds": [
             "1b1f8ac0-b066-47e7-a338-7b66a4de49e4"
           ],
-          "x": 1078.8977891601562,
+          "x": 1138.8977891601562,
           "y": 510.5437,
           "direction": "right"
         },
@@ -1635,7 +1635,7 @@
           "columnIds": [
             "3f98048c-b6d1-43d6-8f82-27a79e490e08"
           ],
-          "x": 876.5608445800781,
+          "x": 906.5608445800781,
           "y": 584.1687,
           "direction": "bottom"
         },

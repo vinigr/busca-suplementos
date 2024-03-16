@@ -1,17 +1,17 @@
 import { Elysia } from "elysia";
-import { companiesRoutes } from "./routes/companies";
-import { authRoutes } from "./routes/auth";
+import { companiesAdminRoutes } from "./routes/admin/companies";
+import { authAdminRoutes } from "./routes/admin/auth";
 import { config } from "./config";
 import { bearer } from "@elysiajs/bearer";
-import { flavorsRoutes } from "./routes/flavors";
+import { flavorsAdminRoutes } from "./routes/admin/flavors";
 import { cors } from "@elysiajs/cors";
-import { productsTypesRoutes } from "./routes/productsTypes";
-import { stampsRoutes } from "./routes/stamps";
-import { productsSubtypesRoutes } from "./routes/productsSubtypes";
+import { productsTypesAdminRoutes } from "./routes/admin/productsTypes";
+import { stampsAdminRoutes } from "./routes/admin/stamps";
+import { productsSubtypesAdminRoutes } from "./routes/admin/productsSubtypes";
 
 const app = new Elysia()
   .use(cors({ methods: "*" }))
-  .use(authRoutes)
+  .use(authAdminRoutes)
   .group("/admin", (app) => {
     return app.use(bearer()).guard(
       {
@@ -31,11 +31,11 @@ const app = new Elysia()
       },
       (app) =>
         app
-          .use(companiesRoutes)
-          .use(flavorsRoutes)
-          .use(productsTypesRoutes)
-          .use(stampsRoutes)
-          .use(productsSubtypesRoutes)
+          .use(companiesAdminRoutes)
+          .use(flavorsAdminRoutes)
+          .use(productsTypesAdminRoutes)
+          .use(stampsAdminRoutes)
+          .use(productsSubtypesAdminRoutes)
           .onError(({ error }) => {
             return { message: error.message };
           })
