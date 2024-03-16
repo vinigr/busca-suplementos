@@ -4,13 +4,15 @@
   "version": "1.0.50",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "bun run --watch src/index.ts",
+    "dev": "bun --watch src/index.ts",
+    "build": "bun build src/index.ts",
+    "start": "NODE_ENV=production bun src/index.ts",
     "db": "bun src/db/dbScript.ts"
   },
   "dependencies": {
-    "@elysiajs/bearer": "^0.8.0",
-    "@elysiajs/cors": "^0.8.0",
-    "@elysiajs/jwt": "^0.8.0",
+    "@elysiajs/bearer": "^1.0.0",
+    "@elysiajs/cors": "^1.0.0",
+    "@elysiajs/jwt": "^1.0.0",
     "dotenv": "^16.4.5",
     "elysia": "latest",
     "orchid-orm": "^1.23.4",
@@ -21,7 +23,7 @@
     "bun-types": "latest",
     "rake-db": "^2.15.3",
     "orchid-orm-test-factory": "^0.5.6",
-    "@types/node": "^20.11.27",
+    "@types/node": "^20.11.28",
     "typescript": "^5.4.2"
   },
   "module": "src/index.js"

@@ -1,10 +1,10 @@
-import { Elysia, t } from "elysia";
+import { Elysia } from "elysia";
 import { companiesRoutes } from "./routes/companies";
 import { authRoutes } from "./routes/auth";
 import { config } from "./config";
-import bearer from "@elysiajs/bearer";
+import { bearer } from "@elysiajs/bearer";
 import { flavorsRoutes } from "./routes/flavors";
-import cors from "@elysiajs/cors";
+import { cors } from "@elysiajs/cors";
 import { productsTypesRoutes } from "./routes/productsTypes";
 import { stampsRoutes } from "./routes/stamps";
 
