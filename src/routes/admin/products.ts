@@ -58,7 +58,7 @@ export const productsAdminRoutes = new Elysia({ prefix: "/products" })
         portion: body.portion,
         weight: body.weight,
         capsules: body.capsules,
-        link: body.link,
+        link: body.link || null,
         stampId: body.stampId,
       });
 
@@ -76,6 +76,65 @@ export const productsAdminRoutes = new Elysia({ prefix: "/products" })
         capsules: t.Nullable(t.Optional(t.Numeric())),
         link: t.Nullable(t.Optional(t.String())),
         stampId: t.Nullable(t.Optional(t.Numeric())),
+      }),
+    }
+  )
+  .put(
+    "/:id",
+    async ({ body, params: { id } }) => {
+      return await db.products.where({ id }).update({
+        name: body.name,
+        companyId: body.companyId,
+        productTypeId: body.productTypeId,
+        productSubtypeId: body.productSubtypeId,
+        form: body.form,
+        portion: body.portion,
+        weight: body.weight,
+        capsules: body.capsules,
+        link: body.link || null,
+        stampId: body.stampId,
+      });
+    },
+    {
+      params: t.Object({
+        id: t.Numeric(),
+      }),
+      body: t.Object({
+        name: t.String({ error: "O nome é obrigatório" }),
+        companyId: t.Numeric({ error: "A empresa é obrigatória" }),
+        productTypeId: t.Numeric({ error: "O tipo do produto é obrigatório" }),
+        productSubtypeId: t.Nullable(t.Optional(t.Numeric())),
+        form: t.Numeric({ error: "A forma é obrigatória" }),
+        portion: t.Nullable(t.Optional(t.Numeric())),
+        weight: t.Nullable(t.Optional(t.Numeric())),
+        capsules: t.Nullable(t.Optional(t.Numeric())),
+        link: t.Nullable(t.Optional(t.String())),
+        stampId: t.Nullable(t.Optional(t.Numeric())),
+      }),
+    }
+  )
+  .get(
+    "/:id",
+    async ({ params: { id } }) => {
+      return await db.products
+        .findByOptional({ id })
+        .select(
+          "id",
+          "name",
+          "companyId",
+          "productTypeId",
+          "productSubtypeId",
+          "stampId",
+          "form",
+          "weight",
+          "portion",
+          "capsules",
+          "link"
+        );
+    },
+    {
+      params: t.Object({
+        id: t.Numeric(),
       }),
     }
   );

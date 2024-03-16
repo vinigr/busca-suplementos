@@ -19,7 +19,7 @@ export class ProductsTable extends BaseTable {
       .nullable(),
     companyId: t.integer().foreignKey("companies", "id"),
     portion: t.integer().nullable(),
-    weigth: t.integer().nullable(),
+    weight: t.integer().nullable(),
     capsules: t.integer().nullable(),
     form: t.integer(),
     stampId: t.integer().foreignKey("stamps", "id").nullable(),
