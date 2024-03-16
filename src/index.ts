@@ -7,6 +7,7 @@ import { flavorsRoutes } from "./routes/flavors";
 import { cors } from "@elysiajs/cors";
 import { productsTypesRoutes } from "./routes/productsTypes";
 import { stampsRoutes } from "./routes/stamps";
+import { productsSubtypesRoutes } from "./routes/productsSubtypes";
 
 const app = new Elysia()
   .use(cors({ methods: "*" }))
@@ -34,6 +35,10 @@ const app = new Elysia()
           .use(flavorsRoutes)
           .use(productsTypesRoutes)
           .use(stampsRoutes)
+          .use(productsSubtypesRoutes)
+          .onError(({ error }) => {
+            return { message: error.message };
+          })
     );
   })
   .get("/", () => "Hello Elysia")
