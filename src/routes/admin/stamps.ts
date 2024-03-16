@@ -79,4 +79,7 @@ export const stampsAdminRoutes = new Elysia({ prefix: "/stamps" })
         id: t.Numeric(),
       }),
     }
-  );
+  )
+  .get("/list", async () => {
+    return await db.stamps.select("id", "name").order("id");
+  });
