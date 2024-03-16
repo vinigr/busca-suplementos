@@ -4,8 +4,10 @@ import { authRoutes } from "./routes/auth";
 import { config } from "./config";
 import bearer from "@elysiajs/bearer";
 import { flavorsRoutes } from "./routes/flavors";
+import cors from "@elysiajs/cors";
 
 const app = new Elysia()
+  .use(cors())
   .use(authRoutes)
   .group("/admin", (app) => {
     return app.use(bearer()).guard(
@@ -18,7 +20,7 @@ const app = new Elysia()
 
           const token = await jwt.verify(bearer as string);
 
-          if (!token || token.aud !== "1") {
+          if (!token) {
             set.status = 401;
             return { error: "Token não informado ou não é válido" };
           }

@@ -16,7 +16,7 @@ export const companiesRoutes = new Elysia({ prefix: "/companies" })
 
       const categories = await query;
 
-      let countCategories = db.products.count();
+      let countCategories = db.companies.count();
 
       if (search) {
         countCategories = countCategories.where({

@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@elysiajs/bearer": "^0.8.0",
+    "@elysiajs/cors": "^0.8.0",
     "@elysiajs/jwt": "^0.8.0",
     "dotenv": "^16.4.5",
     "elysia": "latest",

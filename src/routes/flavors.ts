@@ -16,7 +16,7 @@ export const flavorsRoutes = new Elysia({ prefix: "/flavors" })
 
       const flavors = await query;
 
-      let countFlavors = db.products.count();
+      let countFlavors = db.flavors.count();
 
       if (search) {
         countFlavors = countFlavors.where({
