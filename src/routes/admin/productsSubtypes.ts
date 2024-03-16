@@ -48,4 +48,21 @@ export const productsSubtypesAdminRoutes = new Elysia({
         id: t.Numeric(),
       }),
     }
+  )
+  .get(
+    "/list",
+    async ({ query: { productTypeId } }) => {
+      let query = db.productsSubtypes.select("id", "name").order("id");
+
+      if (productTypeId) {
+        query = query.where({ productTypeId });
+      }
+
+      return await query;
+    },
+    {
+      query: t.Object({
+        productTypeId: t.Optional(t.Numeric()),
+      }),
+    }
   );
