@@ -9,8 +9,7 @@ export class IngredientsTable extends BaseTable {
     description: t.varchar().nullable(),
     isSweetener: t.boolean().default(false),
     isSugar: t.boolean().default(false),
-    createdAt: t.timestampNoTZ().default(t.sql("now()")),
-    updatedAt: t.timestampNoTZ().default("now()"),
+    ...t.timestampsNoTZ(),
   }));
 
   relations = {

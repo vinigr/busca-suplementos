@@ -8,8 +8,7 @@ export class ProductsSubtypesTable extends BaseTable {
     id: t.identity().primaryKey(),
     name: t.varchar(),
     productTypeId: t.integer().foreignKey("productsTypes", "id"),
-    createdAt: t.timestampNoTZ().default(t.sql("now()")),
-    updatedAt: t.timestampNoTZ().default("now()"),
+    ...t.timestampsNoTZ(),
   }));
 
   relations = {

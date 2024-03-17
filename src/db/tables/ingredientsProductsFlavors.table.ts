@@ -9,8 +9,7 @@ export class IngredientsProductsFlavorsTable extends BaseTable {
     ingredientId: t.integer().foreignKey("ingredients", "id"),
     productFlavorId: t.integer().foreignKey("productsFlavors", "id"),
     order: t.integer(),
-    createdAt: t.timestampNoTZ().default(t.sql("now()")),
-    updatedAt: t.timestampNoTZ().default("now()"),
+    ...t.timestampsNoTZ(),
   }));
 
   relations = {

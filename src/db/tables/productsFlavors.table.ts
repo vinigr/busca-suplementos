@@ -14,8 +14,7 @@ export class ProductsFlavorsTable extends BaseTable {
     productNutritionalInformationId: t
       .integer()
       .foreignKey("productsNutritionalInformations", "id"),
-    createdAt: t.timestampNoTZ().default(t.sql("now()")),
-    updatedAt: t.timestampNoTZ().default("now()"),
+    ...t.timestampsNoTZ(),
   }));
 
   relations = {

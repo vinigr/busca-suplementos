@@ -7,7 +7,6 @@ export class UsersTable extends BaseTable {
     login: t.varchar(),
     password: t.varchar(),
     status: t.integer().default(1),
-    createdAt: t.timestampNoTZ().default(t.sql("now()")),
-    updatedAt: t.timestampNoTZ().default("now()"),
+    ...t.timestampsNoTZ(),
   }));
 }

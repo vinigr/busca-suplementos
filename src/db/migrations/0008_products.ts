@@ -10,8 +10,8 @@ change(async (db) => {
       .foreignKey("productsSubtypes", "id")
       .nullable(),
     companyId: t.integer().foreignKey("companies", "id"),
-    portion: t.integer().nullable(),
-    weight: t.integer().nullable(),
+    portion: t.real().nullable(),
+    weight: t.real().nullable(),
     capsules: t.integer().nullable(),
     form: t.integer(),
     stampId: t.integer().foreignKey("stamps", "id").nullable(),

@@ -19,9 +19,10 @@ export class ProductsNutritionalInformationsTable extends BaseTable {
       .integer()
       .foreignKey("productsNutritionalInformations", "id"),
     isSubItem: t.boolean().default(false),
-    createdAt: t.timestampNoTZ().default(t.sql("now()")),
-    updatedAt: t.timestampNoTZ().default("now()"),
-    productNutritionalInformationGroupId: t.integer().foreignKey('productsNutritionalInformationsGroups', 'id'),
+    productNutritionalInformationGroupId: t
+      .integer()
+      .foreignKey("productsNutritionalInformationsGroups", "id"),
+    ...t.timestampsNoTZ(),
   }));
 
   relations = {

@@ -8,8 +8,7 @@ export class CompaniesTable extends BaseTable {
     name: t.varchar(),
     active: t.boolean().default(true),
     urlImage: t.varchar().nullable(),
-    createdAt: t.timestampNoTZ().default(t.sql("now()")),
-    updatedAt: t.timestampNoTZ().default("now()"),
+    ...t.timestampsNoTZ(),
   }));
 
   relations = {

@@ -8,8 +8,7 @@ export class ProductsNutritionalInformationsGroupsTable extends BaseTable {
     id: t.identity().primaryKey(),
     name: t.varchar(),
     productId: t.integer().foreignKey("products", "id"),
-    createdAt: t.timestampNoTZ().default(t.sql("now()")),
-    updatedAt: t.timestampNoTZ().default("now()"),
+    ...t.timestampsNoTZ(),
   }));
 
   relations = {
