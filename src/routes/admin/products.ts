@@ -137,4 +137,54 @@ export const productsAdminRoutes = new Elysia({ prefix: "/products" })
         id: t.Numeric(),
       }),
     }
+  )
+  .get(
+    "/:id/products-nutritional-informations-groups",
+    async ({ params: { id }, query: { page, size, search } }) => {
+      let query = db.productsNutritionalInformationsGroups
+        .select("id", "name")
+        .where({ productId: id })
+        .limit(Number(size))
+        .offset((Number(page) - 1) * Number(size));
+
+      if (search) {
+        query = query.where({ name: { contains: String(search) } });
+      }
+
+      const productsNutritionalInformationsGroups = await query;
+
+      let countProductsNutritionalInformationsGroups =
+        db.productsNutritionalInformationsGroups.count();
+
+      if (search) {
+        countProductsNutritionalInformationsGroups =
+          countProductsNutritionalInformationsGroups.where({
+            name: { contains: String(search) },
+          });
+      }
+
+      const resultProductsNutritionalInformationsGroups =
+        await countProductsNutritionalInformationsGroups;
+
+      const pageCount = Math.ceil(
+        resultProductsNutritionalInformationsGroups / Number(size)
+      );
+
+      return {
+        data: productsNutritionalInformationsGroups,
+        total: resultProductsNutritionalInformationsGroups,
+        page,
+        pageCount,
+      };
+    },
+    {
+      params: t.Object({
+        id: t.Numeric(),
+      }),
+      query: t.Object({
+        page: t.Numeric({ default: 1 }),
+        size: t.Numeric({ default: 1 }),
+        search: t.Optional(t.String()),
+      }),
+    }
   );
