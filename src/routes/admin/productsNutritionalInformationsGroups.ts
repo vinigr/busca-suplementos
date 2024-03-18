@@ -66,6 +66,7 @@ export const productsNutritionalInformationsGroupsRoutes = new Elysia({
           "quantity",
           "productNutritionalInformationId",
           "unitsMeasurement",
+          "percentageDaily",
           "order",
           "isSubItem",
           {
@@ -77,7 +78,8 @@ export const productsNutritionalInformationsGroupsRoutes = new Elysia({
                   q.nutritionalInformations.select("id", "name"),
               }),
           }
-        );
+        )
+        .order("order");
     },
     {
       params: t.Object({
