@@ -54,4 +54,34 @@ export const productsNutritionalInformationsGroupsRoutes = new Elysia({
         id: t.Numeric(),
       }),
     }
+  )
+  .get(
+    "/:id/products-nutritional-informations",
+    async ({ params: { id } }) => {
+      return await db.productsNutritionalInformations
+        .where({ productNutritionalInformationGroupId: id })
+        .select(
+          "id",
+          "productId",
+          "quantity",
+          "productNutritionalInformationId",
+          "unitsMeasurement",
+          "order",
+          "isSubItem",
+          {
+            nutritionalInformation: (q) =>
+              q.nutritionalInformations.select("id", "name"),
+            productsNutritionalInformations: (q) =>
+              q.productsNutritionalInformations.select("id", {
+                nutritionalInformation: (q) =>
+                  q.nutritionalInformations.select("id", "name"),
+              }),
+          }
+        );
+    },
+    {
+      params: t.Object({
+        id: t.Numeric(),
+      }),
+    }
   );

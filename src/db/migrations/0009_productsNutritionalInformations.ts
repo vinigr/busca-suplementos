@@ -8,12 +8,13 @@ change(async (db) => {
       .integer()
       .foreignKey("nutritionalInformations", "id"),
     order: t.integer(),
-    quantity: t.integer(),
-    unitsMeasurement: t.integer(),
-    percentageDaily: t.integer(),
+    quantity: t.real(),
+    unitsMeasurement: t.integer().nullable(),
+    percentageDaily: t.real().nullable(),
     productNutritionalInformationId: t
       .integer()
-      .foreignKey("productsNutritionalInformations", "id"),
+      .foreignKey("productsNutritionalInformations", "id")
+      .nullable(),
     isSubItem: t.boolean().default(false),
     ...t.timestampsNoTZ(),
   }));

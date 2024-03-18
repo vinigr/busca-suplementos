@@ -49,7 +49,7 @@ export const productsAdminRoutes = new Elysia({ prefix: "/products" })
   .post(
     "/",
     async ({ body }) => {
-      const productId = await db.products.insert({
+      const { id } = await db.products.create({
         name: body.name,
         companyId: body.companyId,
         productTypeId: body.productTypeId,
@@ -62,7 +62,7 @@ export const productsAdminRoutes = new Elysia({ prefix: "/products" })
         stampId: body.stampId,
       });
 
-      return { productId };
+      return { productId: id };
     },
     {
       body: t.Object({
