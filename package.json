@@ -10,20 +10,20 @@
     "db": "bun src/db/dbScript.ts"
   },
   "dependencies": {
-    "@elysiajs/bearer": "^1.0.0",
-    "@elysiajs/cors": "^1.0.0",
-    "@elysiajs/jwt": "^1.0.0",
+    "@elysiajs/bearer": "^1.0.2",
+    "@elysiajs/cors": "^1.0.2",
+    "@elysiajs/jwt": "^1.0.2",
     "dotenv": "^16.4.5",
     "elysia": "latest",
-    "orchid-orm": "^1.23.5",
-    "orchid-orm-valibot": "^0.0.4",
+    "orchid-orm": "^1.23.6",
+    "orchid-orm-valibot": "^0.0.5",
     "valibot": "^0.30.0"
   },
   "devDependencies": {
     "bun-types": "latest",
-    "rake-db": "^2.15.4",
-    "orchid-orm-test-factory": "^0.5.7",
-    "@types/node": "^20.11.28",
+    "rake-db": "^2.15.6",
+    "orchid-orm-test-factory": "^0.5.8",
+    "@types/node": "^20.11.30",
     "typescript": "^5.4.2"
   },
   "module": "src/index.js"
