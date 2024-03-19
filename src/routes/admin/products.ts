@@ -187,4 +187,53 @@ export const productsAdminRoutes = new Elysia({ prefix: "/products" })
         search: t.Optional(t.String()),
       }),
     }
+  )
+  .get(
+    "/:id/flavors",
+    async ({ params: { id }, query: { page, size, search } }) => {
+      let query = db.productsFlavors
+        .select("id", {
+          flavor: (q) => q.flavor.select("id", "name"),
+        })
+        .where({ productId: id })
+        .limit(Number(size))
+        .offset((Number(page) - 1) * Number(size));
+
+      if (search) {
+        query = query.where({ "flavor.name": { contains: String(search) } });
+      }
+
+      const productsFlavors = await query;
+
+      let countProductsFlavors = db.productsFlavors.count();
+
+      if (search) {
+        countProductsFlavors = countProductsFlavors
+          .with("flavor", db.flavors.select("id", "name"))
+          .where({
+            "flavor.name": { contains: String(search) },
+          });
+      }
+
+      const resultProductsFlavors = await countProductsFlavors;
+
+      const pageCount = Math.ceil(resultProductsFlavors / Number(size));
+
+      return {
+        data: productsFlavors,
+        total: resultProductsFlavors,
+        page,
+        pageCount,
+      };
+    },
+    {
+      params: t.Object({
+        id: t.Numeric(),
+      }),
+      query: t.Object({
+        page: t.Numeric({ default: 1 }),
+        size: t.Numeric({ default: 1 }),
+        search: t.Optional(t.String()),
+      }),
+    }
   );

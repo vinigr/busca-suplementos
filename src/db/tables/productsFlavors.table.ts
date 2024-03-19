@@ -11,6 +11,10 @@ export class ProductsFlavorsTable extends BaseTable {
     productId: t.integer().foreignKey("products", "id"),
     flavorId: t.integer().foreignKey("flavors", "id"),
     link: t.varchar().nullable(),
+    containsGluten: t.boolean(),
+    containsLactose: t.boolean(),
+    containsSoyDerivatives: t.boolean(),
+    containsMilkDerivatives: t.boolean(),
     productNutritionalInformationId: t
       .integer()
       .foreignKey("productsNutritionalInformations", "id"),
@@ -22,11 +26,11 @@ export class ProductsFlavorsTable extends BaseTable {
       columns: ["productId"],
       references: ["id"],
     }),
-    flavors: this.belongsTo(() => FlavorsTable, {
+    flavor: this.belongsTo(() => FlavorsTable, {
       columns: ["flavorId"],
       references: ["id"],
     }),
-    productsNutritionalInformations: this.belongsTo(
+    productNutritionalInformations: this.belongsTo(
       () => ProductsNutritionalInformationsTable,
       {
         columns: ["productNutritionalInformationId"],
