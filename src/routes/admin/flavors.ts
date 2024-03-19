@@ -78,4 +78,7 @@ export const flavorsAdminRoutes = new Elysia({ prefix: "/flavors" })
         id: t.Numeric(),
       }),
     }
-  );
+  )
+  .get("/flavors", async () => {
+    return await db.flavors.select("id", "name").order("name");
+  });
