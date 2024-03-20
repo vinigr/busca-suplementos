@@ -3,7 +3,7 @@ import { IngredientsTable } from "./ingredients.table";
 import { ProductsFlavorsTable } from "./productsFlavors.table";
 
 export class IngredientsProductsFlavorsTable extends BaseTable {
-  readonly table = "ingredientsProductsFlavors ";
+  readonly table = "ingredientsProductsFlavors";
   columns = this.setColumns((t) => ({
     id: t.identity().primaryKey(),
     ingredientId: t.integer().foreignKey("ingredients", "id"),
