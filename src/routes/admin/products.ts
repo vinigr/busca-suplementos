@@ -226,14 +226,12 @@ export const productsAdminRoutes = new Elysia({ prefix: "/products" })
       let countProductsFlavors = db.productsFlavors.count();
 
       if (search) {
-        countProductsFlavors = countProductsFlavors
-          .with("flavor", db.flavors.select("id", "name"))
-          .where({
-            "flavor.name": { contains: String(search) },
-          });
+        countProductsFlavors = countProductsFlavors.join("flavor").where({
+          "flavor.name": { contains: String(search) },
+        });
       }
 
-      const resultProductsFlavors = await countProductsFlavors;
+      const resultProductsFlavors = await countProductsFlavors.count();
 
       const pageCount = Math.ceil(resultProductsFlavors / Number(size));
 
