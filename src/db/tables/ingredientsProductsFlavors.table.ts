@@ -13,7 +13,7 @@ export class IngredientsProductsFlavorsTable extends BaseTable {
   }));
 
   relations = {
-    ingredients: this.belongsTo(() => IngredientsTable, {
+    ingredient: this.belongsTo(() => IngredientsTable, {
       columns: ["ingredientId"],
       references: ["id"],
     }),
