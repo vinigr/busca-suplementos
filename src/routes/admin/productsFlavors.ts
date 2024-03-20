@@ -7,15 +7,21 @@ export const productsFlavorsRoutes = new Elysia({
   .post(
     "/",
     async ({ body }) => {
-      await db.productsFlavors.insert({
+      const { id } = await db.productsFlavors.create({
         ...body,
+        link: body.link || null,
       });
+
+      return { productFlavorId: id };
     },
     {
       body: t.Object({
         productId: t.Numeric({ error: "Produto não informado" }),
         flavorId: t.Numeric({
           error: "Sabor não informado",
+        }),
+        productNutritionalInformationGroupId: t.Numeric({
+          error: "Informação nutricional não informada",
         }),
         containsGluten: t.Boolean({
           error: "Não foi informado se contem glúten",
@@ -38,6 +44,7 @@ export const productsFlavorsRoutes = new Elysia({
     async ({ body, params: { id } }) => {
       return await db.productsFlavors.where({ id }).update({
         ...body,
+        link: body.link || null,
       });
     },
     {
@@ -46,6 +53,9 @@ export const productsFlavorsRoutes = new Elysia({
       }),
       body: t.Object({
         productId: t.Numeric({ error: "Produto não informado" }),
+        productNutritionalInformationGroupId: t.Numeric({
+          error: "Informação nutricional não informada",
+        }),
         flavorId: t.Numeric({
           error: "Sabor não informado",
         }),
@@ -62,6 +72,28 @@ export const productsFlavorsRoutes = new Elysia({
           error: "Não foi informado se contem derivados de leite",
         }),
         link: t.Nullable(t.Optional(t.String())),
+      }),
+    }
+  )
+  .get(
+    "/:id",
+    async ({ params: { id } }) => {
+      return await db.productsFlavors
+        .findByOptional({ id })
+        .select(
+          "id",
+          "flavorId",
+          "productNutritionalInformationGroupId",
+          "link",
+          "containsGluten",
+          "containsLactose",
+          "containsMilkDerivatives",
+          "containsSoyDerivatives"
+        );
+    },
+    {
+      params: t.Object({
+        id: t.Numeric(),
       }),
     }
   )

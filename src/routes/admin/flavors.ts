@@ -79,6 +79,6 @@ export const flavorsAdminRoutes = new Elysia({ prefix: "/flavors" })
       }),
     }
   )
-  .get("/flavors", async () => {
+  .get("/list", async () => {
     return await db.flavors.select("id", "name").order("name");
   });

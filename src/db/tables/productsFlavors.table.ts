@@ -1,8 +1,8 @@
 import { BaseTable } from "../baseTable";
 import { ProductsTable } from "./products.table";
 import { FlavorsTable } from "./flavors.table";
-import { ProductsNutritionalInformationsTable } from "./productsNutritionalInformations.table";
 import { IngredientsProductsFlavorsTable } from "./ingredientsProductsFlavors.table";
+import { ProductsNutritionalInformationsGroupsTable } from "./productsNutritionalInformationsGroups.table";
 
 export class ProductsFlavorsTable extends BaseTable {
   readonly table = "productsFlavors";
@@ -15,9 +15,9 @@ export class ProductsFlavorsTable extends BaseTable {
     containsLactose: t.boolean(),
     containsSoyDerivatives: t.boolean(),
     containsMilkDerivatives: t.boolean(),
-    productNutritionalInformationId: t
+    productNutritionalInformationGroupId: t
       .integer()
-      .foreignKey("productsNutritionalInformations", "id"),
+      .foreignKey("productsNutritionalInformationsGroups", "id"),
     ...t.timestampsNoTZ(),
   }));
 
@@ -31,9 +31,9 @@ export class ProductsFlavorsTable extends BaseTable {
       references: ["id"],
     }),
     productNutritionalInformations: this.belongsTo(
-      () => ProductsNutritionalInformationsTable,
+      () => ProductsNutritionalInformationsGroupsTable,
       {
-        columns: ["productNutritionalInformationId"],
+        columns: ["productNutritionalInformationGroupId"],
         references: ["id"],
       }
     ),

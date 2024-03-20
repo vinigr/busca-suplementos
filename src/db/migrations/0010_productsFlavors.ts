@@ -10,9 +10,9 @@ change(async (db) => {
     containsLactose: t.boolean(),
     containsSoyDerivatives: t.boolean(),
     containsMilkDerivatives: t.boolean(),
-    productNutritionalInformationId: t
+    productNutritionalInformationGroupId: t
       .integer()
-      .foreignKey("productsNutritionalInformations", "id"),
+      .foreignKey("productsNutritionalInformationsGroups", "id"),
     ...t.timestampsNoTZ(),
   }));
 });

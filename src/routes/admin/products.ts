@@ -189,6 +189,24 @@ export const productsAdminRoutes = new Elysia({ prefix: "/products" })
     }
   )
   .get(
+    "/:id/products-nutritional-informations-groups/list",
+    async ({ params: { id }, query: { page, size, search } }) => {
+      return await db.productsNutritionalInformationsGroups
+        .select("id", "name")
+        .where({ productId: id });
+    },
+    {
+      params: t.Object({
+        id: t.Numeric(),
+      }),
+      query: t.Object({
+        page: t.Numeric({ default: 1 }),
+        size: t.Numeric({ default: 1 }),
+        search: t.Optional(t.String()),
+      }),
+    }
+  )
+  .get(
     "/:id/flavors",
     async ({ params: { id }, query: { page, size, search } }) => {
       let query = db.productsFlavors
