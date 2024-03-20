@@ -42,7 +42,7 @@ export const ingredientsProductsFlavors = new Elysia({
     async ({ body }) => {
       await db.$transaction(async () => {
         await Promise.all(
-          body.ingredientesNames.split(",").map(async (ingredient, index) => {
+          body.ingredientsNames.split(",").map(async (ingredient, index) => {
             const ingredientName = ingredient.trim().replaceAll(";", ",");
 
             const treatedIngredient =
@@ -73,9 +73,20 @@ export const ingredientsProductsFlavors = new Elysia({
     {
       body: t.Object({
         productFlavorId: t.Numeric({ error: "Sabor do produto não informado" }),
-        ingredientesNames: t.String({
+        ingredientsNames: t.String({
           error: "Ingredientes não informada",
         }),
+      }),
+    }
+  )
+  .delete(
+    "/:id",
+    async ({ params: { id } }) => {
+      return await db.ingredientsProductsFlavors.where({ id }).delete();
+    },
+    {
+      params: t.Object({
+        id: t.Numeric(),
       }),
     }
   );
