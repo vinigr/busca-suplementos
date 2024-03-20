@@ -13,6 +13,7 @@ import { productsNutritionalInformationsGroupsRoutes } from "./routes/admin/prod
 import { nutritionalInformationsRoutes } from "./routes/admin/nutritionalInformations";
 import { productsNutritionalInformationsRoutes } from "./routes/admin/productsNutritionalInformations";
 import { productsFlavorsRoutes } from "./routes/admin/productsFlavors";
+import { ingredientsRoutes } from "./routes/admin/ingredients";
 
 const app = new Elysia()
   .use(cors({ methods: "*" }))
@@ -46,6 +47,7 @@ const app = new Elysia()
           .use(nutritionalInformationsRoutes)
           .use(productsNutritionalInformationsRoutes)
           .use(productsFlavorsRoutes)
+          .use(ingredientsRoutes)
           .onError(({ error }) => {
             console.log(error);
 
