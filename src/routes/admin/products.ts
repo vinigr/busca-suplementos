@@ -1,5 +1,7 @@
 import { Elysia, t } from "elysia";
 import { db } from "../../db/db";
+import { generateRandomString } from "../../helpers/generateRandomString";
+import sharp from "sharp";
 
 export const productsAdminRoutes = new Elysia({ prefix: "/products" })
   .get(
@@ -250,6 +252,28 @@ export const productsAdminRoutes = new Elysia({ prefix: "/products" })
         page: t.Numeric({ default: 1 }),
         size: t.Numeric({ default: 1 }),
         search: t.Optional(t.String()),
+      }),
+    }
+  )
+  .post(
+    "/:id/upload",
+    async ({ body, params: { id } }) => {
+      const nameFile = `${generateRandomString(12)}.jpg`;
+
+      const image = await sharp(await body.image.arrayBuffer())
+        .toFormat("jpg", { quality: 80 })
+        .toBuffer();
+
+      await Bun.write(`./public/products/${nameFile}`, image);
+
+      return await db.products.where({ id }).update({ urlImage: nameFile });
+    },
+    {
+      params: t.Object({
+        id: t.Numeric(),
+      }),
+      body: t.Object({
+        image: t.File(),
       }),
     }
   );

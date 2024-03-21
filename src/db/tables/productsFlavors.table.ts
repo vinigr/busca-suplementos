@@ -11,6 +11,7 @@ export class ProductsFlavorsTable extends BaseTable {
     productId: t.integer().foreignKey("products", "id"),
     flavorId: t.integer().foreignKey("flavors", "id"),
     link: t.varchar().nullable(),
+    urlImage: t.varchar().nullable(),
     containsGluten: t.boolean(),
     containsLactose: t.boolean(),
     containsSoyDerivatives: t.boolean(),

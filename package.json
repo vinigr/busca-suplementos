@@ -17,6 +17,7 @@
     "elysia": "latest",
     "orchid-orm": "^1.23.10",
     "orchid-orm-valibot": "^0.0.7",
+    "sharp": "^0.33.2",
     "valibot": "^0.30.0"
   },
   "devDependencies": {
