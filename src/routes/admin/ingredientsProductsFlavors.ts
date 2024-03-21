@@ -74,7 +74,7 @@ export const ingredientsProductsFlavors = new Elysia({
       body: t.Object({
         productFlavorId: t.Numeric({ error: "Sabor do produto não informado" }),
         ingredientsNames: t.String({
-          error: "Ingredientes não informada",
+          error: "Ingredientes não informados",
         }),
       }),
     }

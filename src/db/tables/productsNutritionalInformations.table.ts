@@ -45,9 +45,5 @@ export class ProductsNutritionalInformationsTable extends BaseTable {
         references: ["id"],
       }
     ),
-    productsFlavors: this.hasMany(() => ProductsFlavorsTable, {
-      columns: ["id"],
-      references: ["productNutritionalInformationId"],
-    }),
   };
 }

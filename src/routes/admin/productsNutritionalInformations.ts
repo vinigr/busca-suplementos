@@ -1,5 +1,6 @@
 import { Elysia, t } from "elysia";
 import { db } from "../../db/db";
+import { getUnitMeasurement } from "../../db/utils/getUnitMeasurement";
 
 export const productsNutritionalInformationsRoutes = new Elysia({
   prefix: "/products-nutritional-informations",
@@ -49,6 +50,80 @@ export const productsNutritionalInformationsRoutes = new Elysia({
         percentageDaily: t.Optional(t.Numeric()),
         quantity: t.Numeric({ error: "Quantidade não informada" }),
         unitsMeasurement: t.Nullable(t.Optional(t.Numeric())),
+      }),
+    }
+  )
+  .post(
+    "/multiples",
+    async ({ body }) => {
+      const nutritionalInformations = JSON.parse(
+        body.nutritionalInformationText
+      );
+
+      await db.$transaction(async () => {
+        await Promise.all(
+          nutritionalInformations.map(
+            async (nutritrionalInformation: any, index: number) => {
+              const name =
+                nutritrionalInformation.nutritrionalInformation.trim();
+
+              const treatedNutritionalInformation =
+                name.charAt(0).toUpperCase() + name.slice(1);
+
+              const nutritionalInformation = await db.nutritionalInformations
+                .findByOptional({ name: treatedNutritionalInformation })
+                .select("id");
+
+              let nutritionalInformationId = nutritionalInformation?.id;
+
+              if (!nutritionalInformation) {
+                const nutritionalInformationInsert =
+                  await db.nutritionalInformations.create({
+                    name: treatedNutritionalInformation,
+                  });
+
+                nutritionalInformationId = nutritionalInformationInsert.id;
+              }
+
+              const unitMeasurementText = nutritrionalInformation.unit.replace(
+                /^[0-9.,]+$/,
+                ""
+              );
+
+              const quantity = nutritrionalInformation.unit
+                .match(/^[0-9,\.]+/, "")[0]
+                .replace(",", ".");
+
+              await db.productsNutritionalInformations.insert({
+                productId: body.productId,
+                productNutritionalInformationGroupId:
+                  body.productNutritionalInformationGroupId,
+                nutritionalInformationId,
+                order: index + 1,
+                productNutritionalInformationId:
+                  body.productNutritionalInformationId,
+                percentageDaily: nutritrionalInformation.vd,
+                quantity,
+                unitsMeasurement: getUnitMeasurement(unitMeasurementText),
+                isSubItem: Boolean(body.productNutritionalInformationId),
+              });
+            }
+          )
+        );
+      });
+
+      // console.log({ nutritionalInformations });
+    },
+    {
+      body: t.Object({
+        productId: t.Numeric({ error: "Produto não informado" }),
+        productNutritionalInformationGroupId: t.Numeric({
+          error: "Grupo não informado",
+        }),
+        nutritionalInformationText: t.String({
+          error: "Informações nutricionais não informadas",
+        }),
+        productNutritionalInformationId: t.Nullable(t.Optional(t.Numeric())),
       }),
     }
   )
