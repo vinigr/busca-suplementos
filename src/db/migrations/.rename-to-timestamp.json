@@ -1,0 +1,17 @@
+{
+  "0001_unitsMeasurements.ts": 20240321003211,
+  "0002_companies.ts": 20240321003212,
+  "0003_productsTypes.ts": 20240321003213,
+  "0004_productsSubtypes.ts": 20240321003214,
+  "0005_flavors.ts": 20240321003215,
+  "0006_ingredients.ts": 20240321003216,
+  "0007_nutritionalInformations.ts": 20240321003217,
+  "0008_stamps.ts": 20240321003218,
+  "0009_products.ts": 20240321003219,
+  "0010_productsNutritionalInformations.ts": 20240321003220,
+  "0011_productsFlavors.ts": 20240321003221,
+  "0012_ingredientsProductsFlavors.ts": 20240321003222,
+  "0013_users.ts": 20240321003223,
+  "0014_productsNutritionalInformationsGroups.ts": 20240321003224,
+  "0015_changeProductsNutritionalInformations.ts": 20240321003225
+}

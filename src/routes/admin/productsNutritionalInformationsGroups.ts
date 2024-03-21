@@ -65,11 +65,12 @@ export const productsNutritionalInformationsGroupsRoutes = new Elysia({
           "productId",
           "quantity",
           "productNutritionalInformationId",
-          "unitsMeasurement",
+          "unitMeasurementId",
           "percentageDaily",
           "order",
           "isSubItem",
           {
+            unitMeasurement: (q) => q.unitMeasurement.select("name"),
             nutritionalInformation: (q) =>
               q.nutritionalInformations.select("id", "name"),
             productsNutritionalInformations: (q) =>

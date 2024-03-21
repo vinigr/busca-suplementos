@@ -9,12 +9,18 @@ change(async (db) => {
       .foreignKey("nutritionalInformations", "id"),
     order: t.integer(),
     quantity: t.real(),
-    unitsMeasurement: t.integer().nullable(),
+    unitMeasurementId: t
+      .integer()
+      .foreignKey("unitsMeasurements", "id")
+      .nullable(),
     percentageDaily: t.real().nullable(),
     productNutritionalInformationId: t
       .integer()
       .foreignKey("productsNutritionalInformations", "id")
       .nullable(),
+    productNutritionalInformationGroupId: t
+      .integer()
+      .foreignKey("productsNutritionalInformationsGroups", "id"),
     isSubItem: t.boolean().default(false),
     ...t.timestampsNoTZ(),
   }));

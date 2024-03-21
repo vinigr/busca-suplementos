@@ -2,6 +2,7 @@ import { BaseTable } from "../baseTable";
 import { ProductsTable } from "./products.table";
 import { NutritionalInformationsTable } from "./nutritionalInformations.table";
 import { ProductsFlavorsTable } from "./productsFlavors.table";
+import { UnitsMeasurementsTable } from "./unitsMeasurements.table";
 
 export class ProductsNutritionalInformationsTable extends BaseTable {
   readonly table = "productsNutritionalInformations";
@@ -13,7 +14,10 @@ export class ProductsNutritionalInformationsTable extends BaseTable {
       .foreignKey("nutritionalInformations", "id"),
     order: t.integer(),
     quantity: t.real(),
-    unitsMeasurement: t.integer().nullable(),
+    unitMeasurementId: t
+      .integer()
+      .foreignKey("unitsMeasurements", "id")
+      .nullable(),
     percentageDaily: t.real().nullable(),
     productNutritionalInformationId: t
       .integer()
@@ -45,5 +49,9 @@ export class ProductsNutritionalInformationsTable extends BaseTable {
         references: ["id"],
       }
     ),
+    unitMeasurement: this.belongsTo(() => UnitsMeasurementsTable, {
+      columns: ["unitMeasurementId"],
+      references: ["id"],
+    }),
   };
 }

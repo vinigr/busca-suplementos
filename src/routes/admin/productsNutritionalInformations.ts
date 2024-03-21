@@ -1,6 +1,5 @@
 import { Elysia, t } from "elysia";
 import { db } from "../../db/db";
-import { getUnitMeasurement } from "../../db/utils/getUnitMeasurement";
 
 export const productsNutritionalInformationsRoutes = new Elysia({
   prefix: "/products-nutritional-informations",
@@ -27,12 +26,12 @@ export const productsNutritionalInformationsRoutes = new Elysia({
         productId: body.productId,
         productNutritionalInformationGroupId:
           body.productNutritionalInformationGroupId,
-        nutritionalInformationId,
+        nutritionalInformationId: Number(nutritionalInformationId),
         order: body.order,
         productNutritionalInformationId: body.productNutritionalInformationId,
         percentageDaily: body.percentageDaily,
         quantity: body.quantity,
-        unitsMeasurement: body.unitsMeasurement,
+        unitMeasurementId: body.unitMeasurementId,
         isSubItem: Boolean(body.productNutritionalInformationId),
       });
     },
@@ -49,7 +48,7 @@ export const productsNutritionalInformationsRoutes = new Elysia({
         productNutritionalInformationId: t.Nullable(t.Optional(t.Numeric())),
         percentageDaily: t.Optional(t.Numeric()),
         quantity: t.Numeric({ error: "Quantidade não informada" }),
-        unitsMeasurement: t.Nullable(t.Optional(t.Numeric())),
+        unitMeasurementId: t.Nullable(t.Optional(t.Numeric())),
       }),
     }
   )
@@ -86,7 +85,7 @@ export const productsNutritionalInformationsRoutes = new Elysia({
               }
 
               const unitMeasurementText = nutritrionalInformation.unit.replace(
-                /^[0-9.,]+$/,
+                /[^a-zA-Z]+/g,
                 ""
               );
 
@@ -94,17 +93,21 @@ export const productsNutritionalInformationsRoutes = new Elysia({
                 .match(/^[0-9,\.]+/, "")[0]
                 .replace(",", ".");
 
+              const unitMeasurement = await db.unitsMeasurements
+                .findByOptional({ name: unitMeasurementText })
+                .select("id");
+
               await db.productsNutritionalInformations.insert({
                 productId: body.productId,
                 productNutritionalInformationGroupId:
                   body.productNutritionalInformationGroupId,
-                nutritionalInformationId,
+                nutritionalInformationId: Number(nutritionalInformationId),
                 order: index + 1,
                 productNutritionalInformationId:
                   body.productNutritionalInformationId,
                 percentageDaily: nutritrionalInformation.vd,
                 quantity,
-                unitsMeasurement: getUnitMeasurement(unitMeasurementText),
+                unitMeasurementId: unitMeasurement?.id || null,
                 isSubItem: Boolean(body.productNutritionalInformationId),
               });
             }

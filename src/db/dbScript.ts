@@ -6,6 +6,7 @@ import { BaseTable } from "./baseTable";
 export const change = rakeDb(config.allDatabases, {
   baseTable: BaseTable,
   migrationsPath: "./migrations",
+  migrationId: "timestamp",
   appCodeUpdater: appCodeUpdater({
     tablePath: (tableName) => `./tables/${tableName}.table.ts`,
     ormPath: "./db.ts",

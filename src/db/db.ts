@@ -13,6 +13,7 @@ import { ProductsFlavorsTable } from './tables/productsFlavors.table';
 import { IngredientsProductsFlavorsTable } from './tables/ingredientsProductsFlavors.table';
 import { UsersTable } from './tables/users.table';
 import { ProductsNutritionalInformationsGroupsTable } from './tables/productsNutritionalInformationsGroups.table';
+import { UnitsMeasurementsTable } from './tables/unitsMeasurements.table';
 
 export const db = orchidORM(config.database, {
   companies: CompaniesTable,
@@ -28,4 +29,5 @@ export const db = orchidORM(config.database, {
   ingredientsProductsFlavors: IngredientsProductsFlavorsTable,
   users: UsersTable,
   productsNutritionalInformationsGroups: ProductsNutritionalInformationsGroupsTable,
+  unitsMeasurements: UnitsMeasurementsTable,
 });
