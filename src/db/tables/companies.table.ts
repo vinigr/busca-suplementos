@@ -8,6 +8,7 @@ export class CompaniesTable extends BaseTable {
     name: t.varchar(),
     active: t.boolean().default(true),
     urlImage: t.varchar().nullable(),
+    slug: t.varchar().unique(),
     ...t.timestampsNoTZ(),
   }));
 

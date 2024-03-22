@@ -47,7 +47,15 @@ export const companiesAdminRoutes = new Elysia({ prefix: "/companies" })
   .post(
     "/",
     async ({ body }) => {
-      return await db.companies.insert({ name: body.name });
+      return await db.companies.insert({
+        name: body.name.trim(),
+        slug: body.name
+          .trim()
+          .replace(" ", "-")
+          .toLowerCase()
+          .normalize("NFD")
+          .replace(/\p{Diacritic}/gu, ""),
+      });
     },
     {
       body: t.Object({
@@ -58,9 +66,16 @@ export const companiesAdminRoutes = new Elysia({ prefix: "/companies" })
   .put(
     "/:id",
     async ({ body, params: { id } }) => {
-      return await db.companies
-        .where({ id })
-        .update({ name: body.name, active: body.active });
+      return await db.companies.where({ id }).update({
+        name: body.name.trim(),
+        slug: body.name
+          .trim()
+          .replace(" ", "-")
+          .toLowerCase()
+          .normalize("NFD")
+          .replace(/\p{Diacritic}/gu, ""),
+        active: body.active,
+      });
     },
     {
       params: t.Object({
