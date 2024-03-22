@@ -17,6 +17,7 @@ change(async (db) => {
     stampId: t.integer().foreignKey("stamps", "id").nullable(),
     link: t.varchar().nullable(),
     urlImage: t.varchar().nullable(),
+    slug: t.varchar().unique(),
     ...t.timestampsNoTZ(),
   }));
 });

@@ -51,6 +51,12 @@ export const productsAdminRoutes = new Elysia({ prefix: "/products" })
   .post(
     "/",
     async ({ body }) => {
+      const company = await db.companies.findBy({ id: body.companyId });
+
+      const slug = `${company.name}-${body.name.trim().replace(" ", "-")}-${
+        body.portion ? body.portion : body.weight
+      }`.toLowerCase();
+
       const { id } = await db.products.create({
         name: body.name,
         companyId: body.companyId,
@@ -62,6 +68,7 @@ export const productsAdminRoutes = new Elysia({ prefix: "/products" })
         capsules: body.capsules,
         link: body.link || null,
         stampId: body.stampId,
+        slug,
       });
 
       return { productId: id };
@@ -84,6 +91,12 @@ export const productsAdminRoutes = new Elysia({ prefix: "/products" })
   .put(
     "/:id",
     async ({ body, params: { id } }) => {
+      const company = await db.companies.findBy({ id: body.companyId });
+
+      const slug = `${company.name}-${body.name.trim().replace(" ", "-")}-${
+        body.portion ? body.portion : body.weight
+      }`.toLowerCase();
+
       return await db.products.where({ id }).update({
         name: body.name,
         companyId: body.companyId,
@@ -95,6 +108,7 @@ export const productsAdminRoutes = new Elysia({ prefix: "/products" })
         capsules: body.capsules,
         link: body.link || null,
         stampId: body.stampId,
+        slug,
       });
     },
     {

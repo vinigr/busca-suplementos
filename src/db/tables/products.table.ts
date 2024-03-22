@@ -25,6 +25,7 @@ export class ProductsTable extends BaseTable {
     stampId: t.integer().foreignKey("stamps", "id").nullable(),
     urlImage: t.varchar().nullable(),
     link: t.varchar().nullable(),
+    slug: t.varchar().unique(),
     ...t.timestampsNoTZ(),
   }));
 
