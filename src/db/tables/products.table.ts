@@ -26,6 +26,11 @@ export class ProductsTable extends BaseTable {
     urlImage: t.varchar().nullable(),
     link: t.varchar().nullable(),
     slug: t.varchar().unique(),
+    priceDose: t.real().nullable(),
+    cashPrice: t.integer().nullable(),
+    installmentPrice: t.integer().nullable(),
+    cashPriceSelectorHTML: t.varchar().nullable(),
+    installmentPriceSelectorHTML: t.varchar().nullable(),
     ...t.timestampsNoTZ(),
   }));
 

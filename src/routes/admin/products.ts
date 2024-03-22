@@ -57,6 +57,18 @@ export const productsAdminRoutes = new Elysia({ prefix: "/products" })
         body.portion ? body.portion : body.weight
       }`.toLowerCase();
 
+      let priceDose = null;
+
+      if (body.cashPrice) {
+        if (body.form === 1 && body.weight && body.portion) {
+          priceDose = body.cashPrice / (body.weight / body.portion);
+        }
+
+        if (body.form === 2 && body.capsules && body.portion) {
+          priceDose = body.cashPrice / (body.capsules / body.portion);
+        }
+      }
+
       const { id } = await db.products.create({
         name: body.name,
         companyId: body.companyId,
@@ -65,10 +77,15 @@ export const productsAdminRoutes = new Elysia({ prefix: "/products" })
         form: body.form,
         portion: body.portion,
         weight: body.weight,
-        capsules: body.capsules,
+        capsules: body.capsules, // 1 - powder / 2 - capsules
         link: body.link || null,
         stampId: body.stampId,
         slug,
+        priceDose,
+        cashPrice: body.cashPrice || null,
+        installmentPrice: body.installmentPrice || null,
+        cashPriceSelectorHTML: body.cashPriceSelectorHTML || null,
+        installmentPriceSelectorHTML: body.installmentPriceSelectorHTML || null,
       });
 
       return { productId: id };
@@ -85,6 +102,10 @@ export const productsAdminRoutes = new Elysia({ prefix: "/products" })
         capsules: t.Nullable(t.Optional(t.Numeric())),
         link: t.Nullable(t.Optional(t.String())),
         stampId: t.Nullable(t.Optional(t.Numeric())),
+        cashPrice: t.Nullable(t.Optional(t.Numeric())),
+        installmentPrice: t.Nullable(t.Optional(t.Numeric())),
+        cashPriceSelectorHTML: t.Nullable(t.Optional(t.String())),
+        installmentPriceSelectorHTML: t.Nullable(t.Optional(t.String())),
       }),
     }
   )
@@ -96,6 +117,18 @@ export const productsAdminRoutes = new Elysia({ prefix: "/products" })
       const slug = `${company.name}-${body.name.trim().replace(" ", "-")}-${
         body.portion ? body.portion : body.weight
       }`.toLowerCase();
+
+      let priceDose = null;
+
+      if (body.cashPrice) {
+        if (body.form === 1 && body.weight && body.portion) {
+          priceDose = body.cashPrice / (body.weight / body.portion);
+        }
+
+        if (body.form === 2 && body.capsules && body.portion) {
+          priceDose = body.cashPrice / (body.capsules / body.portion);
+        }
+      }
 
       return await db.products.where({ id }).update({
         name: body.name,
@@ -109,6 +142,11 @@ export const productsAdminRoutes = new Elysia({ prefix: "/products" })
         link: body.link || null,
         stampId: body.stampId,
         slug,
+        priceDose,
+        cashPrice: body.cashPrice || null,
+        installmentPrice: body.installmentPrice || null,
+        cashPriceSelectorHTML: body.cashPriceSelectorHTML || null,
+        installmentPriceSelectorHTML: body.installmentPriceSelectorHTML || null,
       });
     },
     {
@@ -126,6 +164,10 @@ export const productsAdminRoutes = new Elysia({ prefix: "/products" })
         capsules: t.Nullable(t.Optional(t.Numeric())),
         link: t.Nullable(t.Optional(t.String())),
         stampId: t.Nullable(t.Optional(t.Numeric())),
+        cashPrice: t.Nullable(t.Optional(t.Numeric())),
+        installmentPrice: t.Nullable(t.Optional(t.Numeric())),
+        cashPriceSelectorHTML: t.Nullable(t.Optional(t.String())),
+        installmentPriceSelectorHTML: t.Nullable(t.Optional(t.String())),
       }),
     }
   )
@@ -145,7 +187,11 @@ export const productsAdminRoutes = new Elysia({ prefix: "/products" })
           "weight",
           "portion",
           "capsules",
-          "link"
+          "link",
+          "cashPrice",
+          "installmentPrice",
+          "cashPriceSelectorHTML",
+          "installmentPriceSelectorHTML"
         );
     },
     {
