@@ -64,7 +64,7 @@ export const productsNutritionalInformationsRoutes = new Elysia({
           nutritionalInformations.map(
             async (nutritrionalInformation: any, index: number) => {
               const name =
-                nutritrionalInformation.nutritrionalInformation.trim();
+                nutritrionalInformation.nutritionalInformation.trim();
 
               const treatedNutritionalInformation =
                 name.charAt(0).toUpperCase() + name.slice(1);
@@ -105,7 +105,7 @@ export const productsNutritionalInformationsRoutes = new Elysia({
                 order: index + 1,
                 productNutritionalInformationId:
                   body.productNutritionalInformationId,
-                percentageDaily: nutritrionalInformation.vd,
+                percentageDaily: nutritrionalInformation.vd || null,
                 quantity,
                 unitMeasurementId: unitMeasurement?.id || null,
                 isSubItem: Boolean(body.productNutritionalInformationId),

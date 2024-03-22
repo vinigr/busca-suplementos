@@ -7,8 +7,8 @@ export const productsNutritionalInformationsGroupsRoutes = new Elysia({
   .post(
     "/",
     async ({ body }) => {
-      const productNutritionalInformationsGroupId =
-        await db.productsNutritionalInformationsGroups.insert({
+      const { id: productNutritionalInformationsGroupId } =
+        await db.productsNutritionalInformationsGroups.create({
           name: body.name,
           productId: body.productId,
         });
