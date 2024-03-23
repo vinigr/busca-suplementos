@@ -10,6 +10,12 @@ export const productsSubtypesAdminRoutes = new Elysia({
       return await db.productsSubtypes.insert({
         name: body.name.trim(),
         productTypeId: body.productTypeId,
+        slug: body.name
+          .trim()
+          .replace(" ", "-")
+          .toLowerCase()
+          .normalize("NFD")
+          .replace(/\p{Diacritic}/gu, ""),
       });
     },
     {
@@ -22,9 +28,16 @@ export const productsSubtypesAdminRoutes = new Elysia({
   .put(
     "/:id",
     async ({ body, params: { id } }) => {
-      return await db.productsSubtypes
-        .where({ id })
-        .update({ name: body.name.trim(), productTypeId: body.productTypeId });
+      return await db.productsSubtypes.where({ id }).update({
+        name: body.name.trim(),
+        productTypeId: body.productTypeId,
+        slug: body.name
+          .trim()
+          .replace(" ", "-")
+          .toLowerCase()
+          .normalize("NFD")
+          .replace(/\p{Diacritic}/gu, ""),
+      });
     },
     {
       params: t.Object({

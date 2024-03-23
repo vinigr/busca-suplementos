@@ -49,7 +49,15 @@ export const productsTypesAdminRoutes = new Elysia({
   .post(
     "/",
     async ({ body }) => {
-      return await db.productsTypes.insert({ name: body.name.trim() });
+      return await db.productsTypes.insert({
+        name: body.name.trim(),
+        slug: body.name
+          .trim()
+          .replace(" ", "-")
+          .toLowerCase()
+          .normalize("NFD")
+          .replace(/\p{Diacritic}/gu, ""),
+      });
     },
     {
       body: t.Object({
@@ -60,9 +68,15 @@ export const productsTypesAdminRoutes = new Elysia({
   .put(
     "/:id",
     async ({ body, params: { id } }) => {
-      return await db.productsTypes
-        .where({ id })
-        .update({ name: body.name.trim() });
+      return await db.productsTypes.where({ id }).update({
+        name: body.name.trim(),
+        slug: body.name
+          .trim()
+          .replace(" ", "-")
+          .toLowerCase()
+          .normalize("NFD")
+          .replace(/\p{Diacritic}/gu, ""),
+      });
     },
     {
       params: t.Object({

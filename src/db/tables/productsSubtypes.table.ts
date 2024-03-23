@@ -7,6 +7,7 @@ export class ProductsSubtypesTable extends BaseTable {
   columns = this.setColumns((t) => ({
     id: t.identity().primaryKey(),
     name: t.varchar(),
+    slug: t.varchar().index(),
     productTypeId: t.integer().foreignKey("productsTypes", "id"),
     ...t.timestampsNoTZ(),
   }));
