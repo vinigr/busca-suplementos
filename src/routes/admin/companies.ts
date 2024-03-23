@@ -51,10 +51,10 @@ export const companiesAdminRoutes = new Elysia({ prefix: "/companies" })
         name: body.name.trim(),
         slug: body.name
           .trim()
-          .replace(" ", "-")
+          .replaceAll(" ", "-")
           .toLowerCase()
           .normalize("NFD")
-          .replace(/\p{Diacritic}/gu, ""),
+          .replaceAll(/\p{Diacritic}/gu, ""),
       });
     },
     {
@@ -70,10 +70,10 @@ export const companiesAdminRoutes = new Elysia({ prefix: "/companies" })
         name: body.name.trim(),
         slug: body.name
           .trim()
-          .replace(" ", "-")
+          .replaceAll(" ", "-")
           .toLowerCase()
           .normalize("NFD")
-          .replace(/\p{Diacritic}/gu, ""),
+          .replaceAll(/\p{Diacritic}/gu, ""),
         active: body.active,
       });
     },

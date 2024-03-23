@@ -53,7 +53,11 @@ export const productsAdminRoutes = new Elysia({ prefix: "/products" })
     async ({ body }) => {
       const company = await db.companies.findBy({ id: body.companyId });
 
-      const slug = `${company.name}-${body.name.trim().replace(" ", "-")}-${
+      const slug = `${company.slug}-${body.name
+        .trim()
+        .replaceAll(" ", "-")
+        .normalize("NFD")
+        .replaceAll(/\p{Diacritic}/gu, "")}-${
         body.portion ? body.portion : body.weight
       }`.toLowerCase();
 
