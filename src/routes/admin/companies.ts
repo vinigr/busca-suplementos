@@ -1,6 +1,7 @@
 import { Elysia, t } from "elysia";
 import { db } from "../../db/db";
 import { generateRandomString } from "../../helpers/generateRandomString";
+import sharp from "sharp";
 
 export const companiesAdminRoutes = new Elysia({ prefix: "/companies" })
   .get(
@@ -92,8 +93,13 @@ export const companiesAdminRoutes = new Elysia({ prefix: "/companies" })
     async ({ body, params: { id } }) => {
       const nameFile = `${generateRandomString(12)}.png`;
 
+      const image = await sharp(await body.image.arrayBuffer())
+        .toFormat("png", { quality: 80 })
+        .toBuffer();
+
       const path = `./public/companies/${nameFile}`;
-      await Bun.write(path, body.image);
+
+      await Bun.write(`./public/companies/${nameFile}`, image);
 
       return await db.companies.where({ id }).update({ urlImage: nameFile });
     },

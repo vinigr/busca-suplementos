@@ -322,10 +322,10 @@ export const productsAdminRoutes = new Elysia({ prefix: "/products" })
   .post(
     "/:id/upload",
     async ({ body, params: { id } }) => {
-      const nameFile = `${generateRandomString(12)}.jpg`;
+      const nameFile = `${generateRandomString(12)}.png`;
 
       const image = await sharp(await body.image.arrayBuffer())
-        .toFormat("jpg", { quality: 80 })
+        .toFormat("png", { quality: 80 })
         .toBuffer();
 
       await Bun.write(`./public/products/${nameFile}`, image);
