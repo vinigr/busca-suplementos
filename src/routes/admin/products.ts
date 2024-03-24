@@ -10,6 +10,7 @@ export const productsAdminRoutes = new Elysia({ prefix: "/products" })
       let query = db.products
         .select("id", "name", {
           productType: (q) => q.productsTypes.select("id", "name"),
+          company: (q) => q.companies.select("id", "name"),
         })
         // .with("productType", db.productsTypes.select("id", "name"))
         .limit(Number(size))
