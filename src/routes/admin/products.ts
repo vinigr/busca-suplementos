@@ -58,7 +58,7 @@ export const productsAdminRoutes = new Elysia({ prefix: "/products" })
         .replaceAll(" ", "-")
         .normalize("NFD")
         .replaceAll(/\p{Diacritic}/gu, "")}-${
-        body.portion ? body.portion : body.weight
+        body.capsules ? body.capsules : body.weight
       }`.toLowerCase();
 
       let priceDose = null;
@@ -85,7 +85,7 @@ export const productsAdminRoutes = new Elysia({ prefix: "/products" })
         link: body.link || null,
         stampId: body.stampId,
         slug,
-        priceDose,
+        priceDose: priceDose ? Number(priceDose.toFixed(0)) : null,
         cashPrice: body.cashPrice || null,
         installmentPrice: body.installmentPrice || null,
         cashPriceSelectorHTML: body.cashPriceSelectorHTML || null,
@@ -119,7 +119,7 @@ export const productsAdminRoutes = new Elysia({ prefix: "/products" })
       const company = await db.companies.findBy({ id: body.companyId });
 
       const slug = `${company.name}-${body.name.trim().replace(" ", "-")}-${
-        body.portion ? body.portion : body.weight
+        body.capsules ? body.capsules : body.weight
       }`.toLowerCase();
 
       let priceDose = null;
@@ -146,7 +146,7 @@ export const productsAdminRoutes = new Elysia({ prefix: "/products" })
         link: body.link || null,
         stampId: body.stampId,
         slug,
-        priceDose,
+        priceDose: priceDose ? Number(priceDose.toFixed(0)) : null,
         cashPrice: body.cashPrice || null,
         installmentPrice: body.installmentPrice || null,
         cashPriceSelectorHTML: body.cashPriceSelectorHTML || null,

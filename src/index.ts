@@ -17,6 +17,7 @@ import { ingredientsRoutes } from "./routes/admin/ingredients";
 import { ingredientsProductsFlavors } from "./routes/admin/ingredientsProductsFlavors";
 import { unitsMeasurementsAdminRoutes } from "./routes/admin/unitsMeasurements";
 import { productsTypesClientRoutes } from "./routes/client/productsTypes";
+import { productsSubtypesClientRoutes } from "./routes/client/productsSubtypes";
 
 const app = new Elysia()
   .use(cors({ methods: "*" }))
@@ -61,7 +62,7 @@ const app = new Elysia()
     );
   })
   .group("", (app) => {
-    return app.use(productsTypesClientRoutes);
+    return app.use(productsTypesClientRoutes).use(productsSubtypesClientRoutes);
   })
   .get("/", () => "Hello Elysia")
   .listen(config.port);
