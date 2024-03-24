@@ -13,6 +13,7 @@
     "@elysiajs/bearer": "^1.0.2",
     "@elysiajs/cors": "^1.0.2",
     "@elysiajs/jwt": "^1.0.2",
+    "@elysiajs/static": "^1.0.2",
     "dotenv": "^16.4.5",
     "elysia": "latest",
     "orchid-orm": "^1.23.11",

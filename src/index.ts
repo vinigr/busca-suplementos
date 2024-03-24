@@ -18,9 +18,11 @@ import { ingredientsProductsFlavors } from "./routes/admin/ingredientsProductsFl
 import { unitsMeasurementsAdminRoutes } from "./routes/admin/unitsMeasurements";
 import { productsTypesClientRoutes } from "./routes/client/productsTypes";
 import { productsSubtypesClientRoutes } from "./routes/client/productsSubtypes";
+import staticPlugin from "@elysiajs/static";
 
 const app = new Elysia()
   .use(cors({ methods: "*" }))
+  .use(staticPlugin())
   .use(authAdminRoutes)
   .group("/admin", (app) => {
     return app.use(bearer()).guard(
