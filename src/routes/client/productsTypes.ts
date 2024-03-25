@@ -76,6 +76,14 @@ export const productsTypesClientRoutes = new Elysia({
           flavors: (q) => q.productsFlavors.select("flavorId"),
         });
 
+      if (!products.length) {
+        return {
+          companies: [],
+          productSubtypes: [],
+          flavors: [],
+        };
+      }
+
       const companies = await db.companies
         .select("slug", "name")
         .whereIn(
