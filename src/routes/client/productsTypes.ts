@@ -56,4 +56,65 @@ export const productsTypesClientRoutes = new Elysia({
         size: t.Numeric({ default: 20 }),
       }),
     }
+  )
+  .get(
+    ":slug/products/filters",
+    async ({ params: { slug }, set }) => {
+      const productType = await db.productsTypes
+        .findByOptional({ slug })
+        .select("id");
+
+      if (!productType) {
+        set.status = 404;
+
+        return { error: "Categoria não encontrada" };
+      }
+
+      const products = await db.products
+        .where({ productTypeId: productType.id })
+        .select("cashPrice", "productSubtypeId", "companyId", {
+          flavors: (q) => q.productsFlavors.select("flavorId"),
+        });
+
+      const companies = await db.companies
+        .select("slug", "name")
+        .whereIn(
+          "id",
+          products.map((product) => product.companyId)
+        )
+        .order("name");
+
+      const subTypesIds = products
+        .filter((product) => product.productSubtypeId)
+        .map((product) => product.productSubtypeId!);
+
+      const productSubtypes = subTypesIds.length
+        ? await db.productsSubtypes
+            .select("slug", "name")
+            .whereIn("id", subTypesIds)
+            .order("name")
+        : [];
+
+      const flavorsIds = products
+        .map((product) => {
+          return product.flavors.map((productFlavor) => productFlavor.flavorId);
+        })
+        .flat();
+
+      const flavors = await db.flavors
+        .select("id", "name")
+        .whereIn("id", flavorsIds)
+        .order("name");
+
+      return {
+        companies,
+        productSubtypes,
+        flavors,
+      };
+    },
+    {
+      params: t.Object({
+        slug: t.String(),
+      }),
+    }
   );
