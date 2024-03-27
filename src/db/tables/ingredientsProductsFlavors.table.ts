@@ -9,6 +9,7 @@ export class IngredientsProductsFlavorsTable extends BaseTable {
     ingredientId: t.integer().foreignKey("ingredients", "id"),
     productFlavorId: t.integer().foreignKey("productsFlavors", "id"),
     order: t.integer(),
+    capsule: t.boolean().default(false),
     ...t.timestampsNoTZ(),
   }));
 
