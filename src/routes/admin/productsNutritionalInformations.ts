@@ -46,7 +46,7 @@ export const productsNutritionalInformationsRoutes = new Elysia({
         }),
         order: t.Numeric({ error: "Ordem não informada" }),
         productNutritionalInformationId: t.Nullable(t.Optional(t.Numeric())),
-        percentageDaily: t.Optional(t.Numeric()),
+        percentageDaily: t.Nullable(t.Optional(t.Numeric())),
         quantity: t.Numeric({ error: "Quantidade não informada" }),
         unitMeasurementId: t.Nullable(t.Optional(t.Numeric())),
       }),

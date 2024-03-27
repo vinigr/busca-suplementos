@@ -56,7 +56,9 @@ export const productsAdminRoutes = new Elysia({ prefix: "/products" })
 
       const slug = `${company.slug}-${body.name
         .trim()
+        .replaceAll("  ", " ")
         .replaceAll(" ", "-")
+        .replaceAll("%", "")
         .normalize("NFD")
         .replaceAll(/\p{Diacritic}/gu, "")}-${
         body.capsules ? body.capsules : body.weight
@@ -119,7 +121,13 @@ export const productsAdminRoutes = new Elysia({ prefix: "/products" })
     async ({ body, params: { id } }) => {
       const company = await db.companies.findBy({ id: body.companyId });
 
-      const slug = `${company.name}-${body.name.trim().replace(" ", "-")}-${
+      const slug = `${company.slug}-${body.name
+        .trim()
+        .replaceAll("  ", " ")
+        .replaceAll(" ", "-")
+        .replaceAll("%", "")
+        .normalize("NFD")
+        .replaceAll(/\p{Diacritic}/gu, "")}-${
         body.capsules ? body.capsules : body.weight
       }`.toLowerCase();
 
