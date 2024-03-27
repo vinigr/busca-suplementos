@@ -38,17 +38,13 @@ export const productsClientRoutes = new Elysia({
           nutritionalInformations: (q) =>
             q.productsNutritionalInformationsGroups.select("id", {
               informations: (q) =>
-                q.productsNutritionalInformations.select(
-                  "id",
-                  "order",
-                  "percentageDaily",
-                  "quantity",
-                  {
+                q.productsNutritionalInformations
+                  .select("id", "order", "percentageDaily", "quantity", {
                     unitMeasurement: (q) => q.unitMeasurement.select("name"),
                     information: (q) =>
                       q.nutritionalInformations.select("name"),
-                  }
-                ),
+                  })
+                  .order("order"),
             }),
         }
       );
