@@ -6,6 +6,7 @@ export class FlavorsTable extends BaseTable {
   columns = this.setColumns((t) => ({
     id: t.identity().primaryKey(),
     name: t.varchar(),
+    slug: t.varchar().unique(),
     ...t.timestampsNoTZ(),
   }));
 

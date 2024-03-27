@@ -1,5 +1,6 @@
 import { Elysia, t } from "elysia";
 import { db } from "../../db/db";
+import { generateSlug } from "../../helpers/generateSlug";
 
 export const flavorsAdminRoutes = new Elysia({ prefix: "/flavors" })
   .get(
@@ -46,7 +47,10 @@ export const flavorsAdminRoutes = new Elysia({ prefix: "/flavors" })
   .post(
     "/",
     async ({ body }) => {
-      return await db.flavors.insert({ name: body.name });
+      return await db.flavors.insert({
+        name: body.name,
+        slug: generateSlug(body.name),
+      });
     },
     {
       body: t.Object({
@@ -57,7 +61,9 @@ export const flavorsAdminRoutes = new Elysia({ prefix: "/flavors" })
   .put(
     "/:id",
     async ({ body, params: { id } }) => {
-      return await db.flavors.where({ id }).update({ name: body.name });
+      return await db.flavors
+        .where({ id })
+        .update({ name: body.name, slug: generateSlug(body.name) });
     },
     {
       params: t.Object({
