@@ -1,5 +1,6 @@
 import { Elysia, t } from "elysia";
 import { db } from "../../db/db";
+import { set } from "valibot";
 
 export const ingredientsProductsFlavors = new Elysia({
   prefix: "/ingredients-products-flavors",
@@ -25,6 +26,7 @@ export const ingredientsProductsFlavors = new Elysia({
         ingredientId,
         productFlavorId: body.productFlavorId,
         order: body.order,
+        capsule: body.capsule,
       });
     },
     {
@@ -34,62 +36,26 @@ export const ingredientsProductsFlavors = new Elysia({
           error: "Ingrediente não informado",
         }),
         order: t.Numeric({ error: "Ordem não informada" }),
-      }),
-    }
-  )
-  .post(
-    "/multiples",
-    async ({ body }) => {
-      await db.$transaction(async () => {
-        await Promise.all(
-          body.ingredientsNames.split(",").map(async (ingredient, index) => {
-            const ingredientName = ingredient.trim().replaceAll(";", ",");
-
-            const treatedIngredient =
-              ingredientName.charAt(0).toUpperCase() + ingredientName.slice(1);
-
-            const ingredientExist = await db.ingredients
-              .findByOptional({ name: treatedIngredient })
-              .select("id");
-
-            let ingredientId = ingredientExist?.id;
-
-            if (!ingredientExist) {
-              const ingredientInsert = await db.ingredients.create({
-                name: treatedIngredient,
-              });
-              ingredientId = ingredientInsert.id;
-            }
-
-            await db.ingredientsProductsFlavors.insert({
-              ingredientId,
-              productFlavorId: body.productFlavorId,
-              order: index + 1,
-            });
-          })
-        );
-      });
-    },
-    {
-      body: t.Object({
-        productFlavorId: t.Numeric({ error: "Sabor do produto não informado" }),
-        ingredientsNames: t.String({
-          error: "Ingredientes não informados",
+        capsule: t.Boolean({
+          error: "Não foi informado se é ingrediente de cápsula",
         }),
       }),
     }
   )
   .post(
-    "/multiples-capsules",
-    async ({ body }) => {
+    "/multiples",
+    async ({ body, set }) => {
+      const lastIngredientOrder = await db.ingredientsProductsFlavors
+        .where({ productFlavorId: body.productFlavorId })
+        .select("order")
+        .order({
+          order: "DESC",
+        })
+        .findByOptional();
+
+      const lastOrder = lastIngredientOrder ? lastIngredientOrder.order : 0;
+
       await db.$transaction(async () => {
-        const lastIngredientOrder = await db.ingredientsProductsFlavors
-          .where({ productFlavorId: body.productFlavorId })
-          .select("order")
-          .findByOptional();
-
-        const lastOrder = lastIngredientOrder ? lastIngredientOrder.order : 0;
-
         await Promise.all(
           body.ingredientsNames.split(",").map(async (ingredient, index) => {
             const ingredientName = ingredient.trim().replaceAll(";", ",");
@@ -114,7 +80,7 @@ export const ingredientsProductsFlavors = new Elysia({
               ingredientId,
               productFlavorId: body.productFlavorId,
               order: lastOrder + index + 1,
-              capsule: true,
+              capsule: body.capsule,
             });
           })
         );
@@ -125,6 +91,9 @@ export const ingredientsProductsFlavors = new Elysia({
         productFlavorId: t.Numeric({ error: "Sabor do produto não informado" }),
         ingredientsNames: t.String({
           error: "Ingredientes não informados",
+        }),
+        capsule: t.Boolean({
+          error: "Não foi informado se é ingrediente de cápsula",
         }),
       }),
     }

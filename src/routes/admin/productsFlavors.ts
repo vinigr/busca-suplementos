@@ -115,7 +115,7 @@ export const productsFlavorsRoutes = new Elysia({
     async ({ params: { id } }) => {
       return await db.ingredientsProductsFlavors
         .where({ productFlavorId: id })
-        .select("id", "order", {
+        .select("id", "order", "capsule", {
           ingredient: (q) => q.ingredient.select("id", "name"),
         })
         .order("order");
