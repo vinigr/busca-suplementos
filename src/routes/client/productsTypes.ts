@@ -13,7 +13,11 @@ export const productsTypesClientRoutes = new Elysia({
   })
   .get(
     ":slug/products",
-    async ({ params: { slug }, query: { size, page }, set }) => {
+    async ({
+      params: { slug },
+      query: { size, page, companies: companiesSlugs },
+      set,
+    }) => {
       const productType = await db.productsTypes
         .findByOptional({ slug })
         .select("id");
@@ -24,6 +28,20 @@ export const productsTypesClientRoutes = new Elysia({
         return { error: "Categoria não encontrada" };
       }
 
+      let companiesIds: number[] = [];
+
+      if (companiesSlugs) {
+        const companiesSlugsArray = companiesSlugs?.split(",");
+
+        if (companiesSlugsArray.length) {
+          const companies = await db.companies
+            .whereIn("slug", companiesSlugsArray)
+            .select("id");
+
+          companiesIds = companies.map((company) => company.id);
+        }
+      }
+
       let queryProducts = db.products
         .where({ productTypeId: productType.id })
         .select("slug", "urlImage", "name", "cashPrice", {
@@ -31,6 +49,10 @@ export const productsTypesClientRoutes = new Elysia({
         })
         .limit(Number(size))
         .offset((Number(page) - 1) * Number(size));
+
+      if (companiesIds.length) {
+        queryProducts = queryProducts.whereIn("companyId", companiesIds);
+      }
 
       const products = await queryProducts;
 
@@ -54,6 +76,7 @@ export const productsTypesClientRoutes = new Elysia({
       query: t.Object({
         page: t.Numeric({ default: 1 }),
         size: t.Numeric({ default: 20 }),
+        companies: t.Optional(t.String()),
       }),
     }
   )

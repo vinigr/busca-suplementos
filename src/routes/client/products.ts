@@ -30,9 +30,11 @@ export const productsClientRoutes = new Elysia({
               {
                 flavor: (q) => q.flavor.select("name"),
                 ingredients: (q) =>
-                  q.ingredientsProductsFlavors.select("order", {
-                    ingredient: (q) => q.ingredient.select("name"),
-                  }),
+                  q.ingredientsProductsFlavors
+                    .select("order", "capsule", {
+                      ingredient: (q) => q.ingredient.select("name"),
+                    })
+                    .order("order"),
               }
             ),
           nutritionalInformations: (q) =>
