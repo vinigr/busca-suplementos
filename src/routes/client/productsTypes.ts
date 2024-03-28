@@ -15,7 +15,13 @@ export const productsTypesClientRoutes = new Elysia({
     ":slug/products",
     async ({
       params: { slug },
-      query: { size, page, companies: companiesSlugs, flavors: flavorsSlugs },
+      query: {
+        size,
+        page,
+        companies: companiesSlugs,
+        flavors: flavorsSlugs,
+        form,
+      },
       set,
     }) => {
       const productType = await db.productsTypes
@@ -74,6 +80,19 @@ export const productsTypesClientRoutes = new Elysia({
         );
       }
 
+      if (form) {
+        const formArray = form.split(",")
+          ? form
+              .split(",")
+              .map((form) => Number(form))
+              .filter((form) => Number.isInteger(form))
+          : [];
+
+        if (formArray) {
+          queryProducts = queryProducts.whereIn("form", formArray);
+        }
+      }
+
       const products = await queryProducts;
 
       let countProducts = queryProducts.count();
@@ -98,6 +117,7 @@ export const productsTypesClientRoutes = new Elysia({
         size: t.Numeric({ default: 20 }),
         companies: t.Optional(t.String()),
         flavors: t.Optional(t.String()),
+        form: t.Optional(t.String()),
       }),
     }
   )
