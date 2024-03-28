@@ -5,5 +5,6 @@ export const generateSlug = (text: string) => {
     .replaceAll(" ", "-")
     .replaceAll("%", "")
     .normalize("NFD")
-    .replaceAll(/\p{Diacritic}/gu, "");
+    .replaceAll(/\p{Diacritic}/gu, "")
+    .toLowerCase();
 };

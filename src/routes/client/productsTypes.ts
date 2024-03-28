@@ -15,7 +15,7 @@ export const productsTypesClientRoutes = new Elysia({
     ":slug/products",
     async ({
       params: { slug },
-      query: { size, page, companies: companiesSlugs },
+      query: { size, page, companies: companiesSlugs, flavors: flavorsSlugs },
       set,
     }) => {
       const productType = await db.productsTypes
@@ -42,6 +42,20 @@ export const productsTypesClientRoutes = new Elysia({
         }
       }
 
+      let flavorsIds: number[] = [];
+
+      if (flavorsSlugs) {
+        const flavorsSlugsArray = flavorsSlugs?.split(",");
+
+        if (flavorsSlugsArray.length) {
+          const flavors = await db.flavors
+            .whereIn("slug", flavorsSlugsArray)
+            .select("id");
+
+          flavorsIds = flavors.map((company) => company.id);
+        }
+      }
+
       let queryProducts = db.products
         .where({ productTypeId: productType.id })
         .select("slug", "urlImage", "name", "cashPrice", {
@@ -52,6 +66,12 @@ export const productsTypesClientRoutes = new Elysia({
 
       if (companiesIds.length) {
         queryProducts = queryProducts.whereIn("companyId", companiesIds);
+      }
+
+      if (flavorsIds.length) {
+        queryProducts = queryProducts.join("productsFlavors", (q) =>
+          q.whereIn({ flavorId: flavorsIds })
+        );
       }
 
       const products = await queryProducts;
@@ -77,6 +97,7 @@ export const productsTypesClientRoutes = new Elysia({
         page: t.Numeric({ default: 1 }),
         size: t.Numeric({ default: 20 }),
         companies: t.Optional(t.String()),
+        flavors: t.Optional(t.String()),
       }),
     }
   )
