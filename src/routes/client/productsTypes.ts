@@ -66,6 +66,7 @@ export const productsTypesClientRoutes = new Elysia({
         .where({ productTypeId: productType.id })
         .select("slug", "urlImage", "name", "cashPrice", {
           company: (q) => q.companies.select("slug", "name"),
+          flavorsCount: (q) => q.productsFlavors.count(),
         })
         .limit(Number(size))
         .offset((Number(page) - 1) * Number(size));
@@ -174,7 +175,7 @@ export const productsTypesClientRoutes = new Elysia({
         .flat();
 
       const flavors = await db.flavors
-        .select("id", "name")
+        .select("slug", "name")
         .whereIn("id", flavorsIds)
         .order("name");
 
