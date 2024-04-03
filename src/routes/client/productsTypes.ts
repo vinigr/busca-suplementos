@@ -21,6 +21,7 @@ export const productsTypesClientRoutes = new Elysia({
         companies: companiesSlugs,
         flavors: flavorsSlugs,
         forms,
+        sort,
       },
       set,
     }) => {
@@ -108,7 +109,43 @@ export const productsTypesClientRoutes = new Elysia({
         }
       }
 
-      const products = await queryProducts;
+      let queryProductsWithSort = queryProducts;
+
+      if (sort) {
+        if (sort === "price.asc") {
+          queryProductsWithSort = queryProductsWithSort.order({
+            cashPrice: "ASC",
+          });
+        }
+
+        if (sort === "price.desc") {
+          queryProductsWithSort = queryProductsWithSort.order({
+            cashPrice: "DESC",
+          });
+        }
+
+        if (sort === "priceDose.asc") {
+          queryProductsWithSort = queryProductsWithSort.order({
+            priceDose: "ASC",
+          });
+        }
+
+        if (sort === "priceDose.desc") {
+          queryProductsWithSort = queryProductsWithSort.order({
+            priceDose: "DESC",
+          });
+        }
+
+        if (sort === "name.desc") {
+          queryProductsWithSort = queryProductsWithSort.order({ name: "DESC" });
+        }
+      } else {
+        queryProductsWithSort = queryProductsWithSort.order({
+          "products.name": "ASC",
+        });
+      }
+
+      const products = await queryProductsWithSort;
 
       let countProducts = queryProducts.count();
 
@@ -133,6 +170,7 @@ export const productsTypesClientRoutes = new Elysia({
         companies: t.Optional(t.String()),
         flavors: t.Optional(t.String()),
         forms: t.Optional(t.String()),
+        sort: t.Optional(t.String()),
       }),
     }
   )
@@ -193,10 +231,38 @@ export const productsTypesClientRoutes = new Elysia({
         .whereIn("id", flavorsIds)
         .order("name");
 
+      const optionsSort = [
+        {
+          value: "price.asc",
+          label: "Menor valor",
+        },
+        {
+          value: "price.desc",
+          label: "Maior valor",
+        },
+        {
+          value: "priceDose.asc",
+          label: "Menor valor por dose",
+        },
+        {
+          value: "priceDose.desc",
+          label: "Maior valor por dose",
+        },
+        {
+          value: "name.asc",
+          label: "Alfabético A-Z",
+        },
+        {
+          value: "name.desc",
+          label: "Alfabético Z-A",
+        },
+      ];
+
       return {
         companies,
         productSubtypes,
         flavors,
+        optionsSort,
       };
     },
     {
