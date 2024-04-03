@@ -20,7 +20,7 @@ export const productsTypesClientRoutes = new Elysia({
         page,
         companies: companiesSlugs,
         flavors: flavorsSlugs,
-        form,
+        forms,
       },
       set,
     }) => {
@@ -81,13 +81,27 @@ export const productsTypesClientRoutes = new Elysia({
         );
       }
 
-      if (form) {
-        const formArray = form.split(",")
-          ? form
-              .split(",")
-              .map((form) => Number(form))
-              .filter((form) => Number.isInteger(form))
-          : [];
+      if (forms) {
+        const formArray = (
+          forms.split(",")
+            ? forms
+                .split(",")
+                .map((form) => {
+                  if (form === "powder") {
+                    return 1;
+                  }
+
+                  if (form === "capsules") {
+                    return 2;
+                  }
+
+                  return;
+                })
+                .filter((form) => {
+                  return Number.isInteger(form);
+                })
+            : []
+        ) as number[];
 
         if (formArray) {
           queryProducts = queryProducts.whereIn("form", formArray);
@@ -118,7 +132,7 @@ export const productsTypesClientRoutes = new Elysia({
         size: t.Numeric({ default: 20 }),
         companies: t.Optional(t.String()),
         flavors: t.Optional(t.String()),
-        form: t.Optional(t.String()),
+        forms: t.Optional(t.String()),
       }),
     }
   )
