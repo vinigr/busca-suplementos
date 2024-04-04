@@ -63,12 +63,43 @@ export const productsTypesClientRoutes = new Elysia({
         }
       }
 
+      const searchProtein = slug === "proteinas";
+
+      const nutritionalInformationProteinId = searchProtein
+        ? (
+            await db.nutritionalInformations
+              .where({ name: "Proteínas" })
+              .select("id")
+              .findBy()
+          ).id
+        : 0;
+
+      console.log({ nutritionalInformationProteinId });
+
       let queryProducts = db.products
         .where({ productTypeId: productType.id })
-        .select("slug", "urlImage", "name", "cashPrice", {
-          company: (q) => q.companies.select("slug", "name"),
-          flavorsCount: (q) => q.productsFlavors.count(),
-        })
+        .select(
+          "slug",
+          "urlImage",
+          "name",
+          "cashPrice",
+          "priceDose",
+          "weight",
+          "portion",
+          {
+            company: (q) => q.companies.select("slug", "name"),
+            flavorsCount: (q) => q.productsFlavors.count(),
+            ...(searchProtein && {
+              quantityProteinDose: (q) =>
+                q.productsNutritionalInformations
+                  .where({
+                    nutritionalInformationId: nutritionalInformationProteinId,
+                  })
+                  .max("quantity")
+                  .limit(1),
+            }),
+          }
+        )
         .limit(Number(size))
         .offset((Number(page) - 1) * Number(size));
 
@@ -153,8 +184,30 @@ export const productsTypesClientRoutes = new Elysia({
 
       const pageCount = Math.ceil(resultCountProducts / Number(size));
 
+      const mapProducts = searchProtein
+        ? products.map((product) => {
+            if (
+              !product.weight ||
+              !product.portion ||
+              !product.quantityProteinDose ||
+              !product.cashPrice
+            ) {
+              return product;
+            }
+
+            const proteinTotal =
+              (product.weight / product.portion) * product.quantityProteinDose;
+
+            return {
+              ...product,
+              proteinTotal,
+              price100g: (product.cashPrice / proteinTotal) * 100,
+            };
+          })
+        : products;
+
       return {
-        data: products,
+        data: mapProducts,
         total: resultCountProducts,
         page,
         pageCount,
@@ -198,6 +251,7 @@ export const productsTypesClientRoutes = new Elysia({
           companies: [],
           productSubtypes: [],
           flavors: [],
+          optionsSort: [],
         };
       }
 
