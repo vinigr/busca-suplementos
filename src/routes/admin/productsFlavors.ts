@@ -9,9 +9,53 @@ export const productsFlavorsRoutes = new Elysia({
   .post(
     "/",
     async ({ body }) => {
+      const productIsProtein = await db.products
+        .where({ id: body.productId })
+        .join("productsTypes", (q) =>
+          q.where({ "productsTypes.slug": "proteinas" })
+        )
+        .select(
+          "products.id",
+          "products.portion",
+          "products.weight",
+          "products.cashPrice"
+        )
+        .findByOptional();
+
+      let proteinTotal = null;
+      let proteinGramPrice = null;
+
+      if (productIsProtein) {
+        const quantityProtein = await db.productsNutritionalInformations
+          .where({
+            productNutritionalInformationGroupId:
+              body.productNutritionalInformationGroupId,
+          })
+          .join("nutritionalInformations", (q) =>
+            q.where({ "nutritionalInformations.name": "Proteínas" })
+          )
+          .select("productsNutritionalInformations.quantity")
+          .findByOptional();
+
+        if (
+          productIsProtein.weight &&
+          productIsProtein.portion &&
+          productIsProtein.cashPrice &&
+          quantityProtein?.quantity
+        ) {
+          proteinTotal =
+            (productIsProtein.weight / productIsProtein.portion) *
+            quantityProtein.quantity;
+
+          proteinGramPrice = productIsProtein.cashPrice / proteinTotal;
+        }
+      }
+
       const { id } = await db.productsFlavors.create({
         ...body,
         link: body.link || null,
+        proteinTotal,
+        proteinGramPrice,
       });
 
       return { productFlavorId: id };
@@ -44,9 +88,53 @@ export const productsFlavorsRoutes = new Elysia({
   .put(
     "/:id",
     async ({ body, params: { id } }) => {
+      const productIsProtein = await db.products
+        .where({ id: body.productId })
+        .join("productsTypes", (q) =>
+          q.where({ "productsTypes.slug": "proteinas" })
+        )
+        .select(
+          "products.id",
+          "products.portion",
+          "products.weight",
+          "products.cashPrice"
+        )
+        .findByOptional();
+
+      let proteinTotal = null;
+      let proteinGramPrice = null;
+
+      if (productIsProtein) {
+        const quantityProtein = await db.productsNutritionalInformations
+          .where({
+            productNutritionalInformationGroupId:
+              body.productNutritionalInformationGroupId,
+          })
+          .join("nutritionalInformations", (q) =>
+            q.where({ "nutritionalInformations.name": "Proteínas" })
+          )
+          .select("productsNutritionalInformations.quantity")
+          .findByOptional();
+
+        if (
+          productIsProtein.weight &&
+          productIsProtein.portion &&
+          productIsProtein.cashPrice &&
+          quantityProtein?.quantity
+        ) {
+          proteinTotal =
+            (productIsProtein.weight / productIsProtein.portion) *
+            quantityProtein.quantity;
+
+          proteinGramPrice = productIsProtein.cashPrice / proteinTotal;
+        }
+      }
+
       return await db.productsFlavors.where({ id }).update({
         ...body,
         link: body.link || null,
+        proteinTotal,
+        proteinGramPrice,
       });
     },
     {

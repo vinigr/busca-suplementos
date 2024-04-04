@@ -11,6 +11,8 @@ change(async (db) => {
     containsLactose: t.boolean(),
     containsSoyDerivatives: t.boolean(),
     containsMilkDerivatives: t.boolean(),
+    proteinTotal: t.real().nullable(),
+    proteinGramPrice: t.real().nullable(),
     productNutritionalInformationGroupId: t
       .integer()
       .foreignKey("productsNutritionalInformationsGroups", "id"),
