@@ -1,5 +1,6 @@
 import { Elysia, t } from "elysia";
 import { db } from "../../db/db";
+import { raw } from "orchid-orm";
 
 export const productsTypesClientRoutes = new Elysia({
   prefix: "/products-types",
@@ -74,8 +75,6 @@ export const productsTypesClientRoutes = new Elysia({
           ).id
         : 0;
 
-      console.log({ nutritionalInformationProteinId });
-
       let queryProducts = db.products
         .where({ productTypeId: productType.id })
         .select(
@@ -90,13 +89,8 @@ export const productsTypesClientRoutes = new Elysia({
             company: (q) => q.companies.select("slug", "name"),
             flavorsCount: (q) => q.productsFlavors.count(),
             ...(searchProtein && {
-              quantityProteinDose: (q) =>
-                q.productsNutritionalInformations
-                  .where({
-                    nutritionalInformationId: nutritionalInformationProteinId,
-                  })
-                  .max("quantity")
-                  .limit(1),
+              proteins: (q) =>
+                q.productsFlavors.select("proteinTotal", "proteinGramPrice"),
             }),
           }
         )
@@ -186,26 +180,22 @@ export const productsTypesClientRoutes = new Elysia({
 
       const mapProducts = searchProtein
         ? products.map((product) => {
-            if (
-              !product.weight ||
-              !product.portion ||
-              !product.quantityProteinDose ||
-              !product.cashPrice
-            ) {
-              return product;
-            }
-
-            const proteinTotal =
-              (product.weight / product.portion) * product.quantityProteinDose;
-
             return {
               ...product,
-              proteinTotal,
-              price100g: (product.cashPrice / proteinTotal) * 100,
+              maxProteinTotal: Math.max(
+                ...product.proteins.map((protein: any) => protein.proteinTotal)
+              ),
+              minProtein100gPrice: Math.round(
+                Math.min(
+                  ...product.proteins
+                    .map((protein: any) => protein.proteinGramPrice)
+                    .filter((protein: any) => !!protein)
+                ) * 100
+              ),
+              proteins: undefined,
             };
           })
         : products;
-
       return {
         data: mapProducts,
         total: resultCountProducts,
