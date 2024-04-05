@@ -1,6 +1,7 @@
 import { Elysia, t } from "elysia";
 import { db } from "../../db/db";
 import { set } from "valibot";
+import { generateSlug } from "../../helpers/generateSlug";
 
 export const ingredientsProductsFlavors = new Elysia({
   prefix: "/ingredients-products-flavors",
@@ -8,8 +9,10 @@ export const ingredientsProductsFlavors = new Elysia({
   .post(
     "/",
     async ({ body }) => {
+      const slug = generateSlug(body.ingredientName.trim());
+
       const ingredient = await db.ingredients
-        .findByOptional({ name: body.ingredientName.trim() })
+        .findByOptional({ slug })
         .select("id");
 
       let ingredientId = ingredient?.id;
@@ -17,6 +20,7 @@ export const ingredientsProductsFlavors = new Elysia({
       if (!ingredient) {
         const ingredientInsert = await db.ingredients.create({
           name: body.ingredientName.trim(),
+          slug,
         });
 
         ingredientId = ingredientInsert.id;
@@ -60,11 +64,13 @@ export const ingredientsProductsFlavors = new Elysia({
           body.ingredientsNames.split(",").map(async (ingredient, index) => {
             const ingredientName = ingredient.trim().replaceAll(";", ",");
 
+            const slug = generateSlug(ingredientName);
+
             const treatedIngredient =
               ingredientName.charAt(0).toUpperCase() + ingredientName.slice(1);
 
             const ingredientExist = await db.ingredients
-              .findByOptional({ name: treatedIngredient })
+              .findByOptional({ slug })
               .select("id");
 
             let ingredientId = ingredientExist?.id;
@@ -72,6 +78,7 @@ export const ingredientsProductsFlavors = new Elysia({
             if (!ingredientExist) {
               const ingredientInsert = await db.ingredients.create({
                 name: treatedIngredient,
+                slug,
               });
               ingredientId = ingredientInsert.id;
             }

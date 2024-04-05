@@ -9,6 +9,7 @@ export class IngredientsTable extends BaseTable {
     description: t.varchar().nullable(),
     isSweetener: t.boolean().default(false),
     isSugar: t.boolean().default(false),
+    slug: t.varchar().unique(),
     ...t.timestampsNoTZ(),
   }));
 
