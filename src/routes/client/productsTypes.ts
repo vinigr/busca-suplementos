@@ -182,8 +182,12 @@ export const productsTypesClientRoutes = new Elysia({
         ? products.map((product) => {
             return {
               ...product,
-              maxProteinTotal: Math.max(
-                ...product.proteins.map((protein: any) => protein.proteinTotal)
+              maxProteinTotal: Math.round(
+                Math.max(
+                  ...product.proteins.map(
+                    (protein: any) => protein.proteinTotal
+                  )
+                )
               ),
               minProtein100gPrice: Math.round(
                 Math.min(

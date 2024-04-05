@@ -27,6 +27,8 @@ export const productsClientRoutes = new Elysia({
               "id",
               "link",
               "productNutritionalInformationGroupId",
+              "proteinGramPrice",
+              "proteinTotal",
               {
                 flavor: (q) => q.flavor.select("name"),
                 ingredients: (q) =>
