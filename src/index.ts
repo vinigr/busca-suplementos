@@ -20,6 +20,7 @@ import { productsTypesClientRoutes } from "./routes/client/productsTypes";
 import { productsSubtypesClientRoutes } from "./routes/client/productsSubtypes";
 import staticPlugin from "@elysiajs/static";
 import { productsClientRoutes } from "./routes/client/products";
+import { companiesClientRoutes } from "./routes/client/companies";
 
 const app = new Elysia()
   .use(cors({ methods: "*" }))
@@ -66,6 +67,7 @@ const app = new Elysia()
   })
   .group("", (app) => {
     return app
+      .use(companiesClientRoutes)
       .use(productsTypesClientRoutes)
       .use(productsSubtypesClientRoutes)
       .use(productsClientRoutes);
