@@ -95,9 +95,10 @@ export const companiesAdminRoutes = new Elysia({ prefix: "/companies" })
 
       const image = await sharp(await body.image.arrayBuffer())
         .toFormat("png", { quality: 80 })
+        .resize(150, 150, {
+          fit: "inside",
+        })
         .toBuffer();
-
-      const path = `./public/companies/${nameFile}`;
 
       await Bun.write(`./public/companies/${nameFile}`, image);
 
