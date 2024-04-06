@@ -11,6 +11,27 @@ export const companiesClientRoutes = new Elysia({
       .order("slug");
   })
   .get(
+    ":slug",
+    async ({ params: { slug }, set }) => {
+      const company = await db.companies
+        .findByOptional({ slug, active: true })
+        .select("slug", "name");
+
+      if (!company) {
+        set.status = 404;
+
+        return { error: "Marca não encontrada" };
+      }
+
+      return company;
+    },
+    {
+      params: t.Object({
+        slug: t.String(),
+      }),
+    }
+  )
+  .get(
     ":slug/products",
     async ({ params: { slug }, set }) => {
       const company = await db.companies
