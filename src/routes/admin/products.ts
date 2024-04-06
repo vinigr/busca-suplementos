@@ -334,6 +334,9 @@ export const productsAdminRoutes = new Elysia({ prefix: "/products" })
       const nameFile = `${generateRandomString(12)}.png`;
 
       const image = await sharp(await body.image.arrayBuffer())
+        .resize(400, 400, {
+          fit: "inside",
+        })
         .toFormat("png", { quality: 80 })
         .toBuffer();
 
