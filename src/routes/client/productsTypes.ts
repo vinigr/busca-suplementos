@@ -13,6 +13,27 @@ export const productsTypesClientRoutes = new Elysia({
       .order("name");
   })
   .get(
+    "/:slug",
+    async ({ params: { slug }, set }) => {
+      const productType = await db.productsTypes
+        .select("slug", "name")
+        .findByOptional({ slug });
+
+      if (!productType) {
+        set.status = 404;
+
+        return { error: "Categoria não encontrada" };
+      }
+
+      return productType;
+    },
+    {
+      params: t.Object({
+        slug: t.String(),
+      }),
+    }
+  )
+  .get(
     ":slug/products",
     async ({
       params: { slug },
