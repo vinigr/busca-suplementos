@@ -27,6 +27,10 @@ export const companiesClientRoutes = new Elysia({
         .where({ companyId: company.id })
         .select("productTypeId");
 
+      if (!productsTypesCompany.length) {
+        return [];
+      }
+
       const productsTypesIds = productsTypesCompany.map(
         (product) => product.productTypeId
       );
