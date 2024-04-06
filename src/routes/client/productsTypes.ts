@@ -66,15 +66,6 @@ export const productsTypesClientRoutes = new Elysia({
 
       const searchProtein = slug === "proteinas";
 
-      const nutritionalInformationProteinId = searchProtein
-        ? (
-            await db.nutritionalInformations
-              .where({ name: "Proteínas" })
-              .select("id")
-              .findBy()
-          ).id
-        : 0;
-
       let queryProducts = db.products
         .where({ productTypeId: productType.id })
         .select(
@@ -88,10 +79,13 @@ export const productsTypesClientRoutes = new Elysia({
           {
             company: (q) => q.companies.select("slug", "name"),
             flavorsCount: (q) => q.productsFlavors.count(),
-            ...(searchProtein && {
-              proteins: (q) =>
-                q.productsFlavors.select("proteinTotal", "proteinGramPrice"),
-            }),
+            ...(searchProtein
+              ? {
+                  maxProteinTotal: (q) => q.productsFlavors.max("proteinTotal"),
+                  minPriceGramProtein: (q) =>
+                    q.productsFlavors.min("proteinGramPrice"),
+                }
+              : {}),
           }
         )
         .limit(Number(size))
@@ -164,6 +158,30 @@ export const productsTypesClientRoutes = new Elysia({
         if (sort === "name.desc") {
           queryProductsWithSort = queryProductsWithSort.order({ name: "DESC" });
         }
+
+        if (sort === "protein-quantity.asc") {
+          queryProductsWithSort = queryProductsWithSort.order({
+            maxProteinTotal: "ASC",
+          });
+        }
+
+        if (sort === "protein-quantity.desc") {
+          queryProductsWithSort = queryProductsWithSort.order({
+            maxProteinTotal: "DESC",
+          });
+        }
+
+        if (sort === "protein-price.asc") {
+          queryProductsWithSort = queryProductsWithSort.order({
+            minPriceGramProtein: "ASC",
+          });
+        }
+
+        if (sort === "protein-price.desc") {
+          queryProductsWithSort = queryProductsWithSort.order({
+            minPriceGramProtein: "DESC",
+          });
+        }
       } else {
         queryProductsWithSort = queryProductsWithSort.order({
           "products.name": "ASC",
@@ -178,30 +196,8 @@ export const productsTypesClientRoutes = new Elysia({
 
       const pageCount = Math.ceil(resultCountProducts / Number(size));
 
-      const mapProducts = searchProtein
-        ? products.map((product) => {
-            return {
-              ...product,
-              maxProteinTotal: Math.round(
-                Math.max(
-                  ...product.proteins.map(
-                    (protein: any) => protein.proteinTotal
-                  )
-                )
-              ),
-              minProtein100gPrice: Math.round(
-                Math.min(
-                  ...product.proteins
-                    .map((protein: any) => protein.proteinGramPrice)
-                    .filter((protein: any) => !!protein)
-                ) * 100
-              ),
-              proteins: undefined,
-            };
-          })
-        : products;
       return {
-        data: mapProducts,
+        data: products,
         total: resultCountProducts,
         page,
         pageCount,
@@ -248,6 +244,8 @@ export const productsTypesClientRoutes = new Elysia({
           optionsSort: [],
         };
       }
+
+      const searchProtein = slug === "proteinas";
 
       const companies = await db.companies
         .select("slug", "name")
@@ -305,6 +303,27 @@ export const productsTypesClientRoutes = new Elysia({
           label: "Alfabético Z-A",
         },
       ];
+
+      if (searchProtein) {
+        optionsSort.push(
+          {
+            value: "protein-quantity.asc",
+            label: "Menor quantidade proteínas",
+          },
+          {
+            value: "protein-quantity.desc",
+            label: "Maior quantidade proteínas",
+          },
+          {
+            value: "protein-price.asc",
+            label: "Menor valor de proteínas",
+          },
+          {
+            value: "protein-price.desc",
+            label: "Maior valor de proteínas",
+          }
+        );
+      }
 
       return {
         companies,
