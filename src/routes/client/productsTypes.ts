@@ -219,9 +219,9 @@ export const productsTypesClientRoutes = new Elysia({
 
       const products = await queryProductsWithSort;
 
-      let countProducts = queryProducts.count();
-
-      const resultCountProducts = await countProducts;
+      const resultCountProducts = await db.products
+        .where({ productTypeId: productType.id })
+        .count();
 
       const pageCount = Math.ceil(resultCountProducts / Number(size));
 
