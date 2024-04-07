@@ -6,7 +6,7 @@ import sharp from "sharp";
 export const productsAdminRoutes = new Elysia({ prefix: "/products" })
   .get(
     "/",
-    async ({ query: { page, size, search } }) => {
+    async ({ query: { page, size, search, companyId } }) => {
       let query = db.products
         .select("id", "name", {
           productType: (q) => q.productsTypes.select("id", "name"),
@@ -15,6 +15,10 @@ export const productsAdminRoutes = new Elysia({ prefix: "/products" })
         // .with("productType", db.productsTypes.select("id", "name"))
         .limit(Number(size))
         .offset((Number(page) - 1) * Number(size));
+
+      if (companyId) {
+        query = query.where({ companyId });
+      }
 
       if (search) {
         query = query.where({ name: { contains: String(search) } });
@@ -46,6 +50,7 @@ export const productsAdminRoutes = new Elysia({ prefix: "/products" })
         page: t.Numeric({ default: 1 }),
         size: t.Numeric({ default: 1 }),
         search: t.Optional(t.String()),
+        companyId: t.Optional(t.Nullable(t.Numeric())),
       }),
     }
   )

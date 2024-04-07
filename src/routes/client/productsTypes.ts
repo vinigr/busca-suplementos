@@ -1,6 +1,5 @@
 import { Elysia, t } from "elysia";
 import { db } from "../../db/db";
-import { raw } from "orchid-orm";
 
 export const productsTypesClientRoutes = new Elysia({
   prefix: "/products-types",
@@ -100,17 +99,24 @@ export const productsTypesClientRoutes = new Elysia({
           {
             company: (q) => q.companies.select("slug", "name"),
             flavorsCount: (q) => q.productsFlavors.count(),
-            ...(searchProtein
-              ? {
-                  maxProteinTotal: (q) => q.productsFlavors.max("proteinTotal"),
-                  minPriceGramProtein: (q) =>
-                    q.productsFlavors.min("proteinGramPrice"),
-                }
-              : {}),
+            // ...(searchProtein
+            //   ? {
+            //       maxProteinTotal: (q) => q.productsFlavors.max("proteinTotal"),
+            //       minPriceGramProtein: (q) =>
+            //         q.productsFlavors.min("proteinGramPrice"),
+            //     }
+            //   : {}),
           }
         )
         .limit(Number(size))
         .offset((Number(page) - 1) * Number(size));
+
+      if (searchProtein) {
+        queryProducts = queryProducts.select({
+          maxProteinTotal: (q) => q.productsFlavors.max("proteinTotal"),
+          minPriceGramProtein: (q) => q.productsFlavors.min("proteinGramPrice"),
+        });
+      }
 
       if (companiesIds.length) {
         queryProducts = queryProducts.whereIn("companyId", companiesIds);
@@ -180,28 +186,30 @@ export const productsTypesClientRoutes = new Elysia({
           queryProductsWithSort = queryProductsWithSort.order({ name: "DESC" });
         }
 
-        if (sort === "protein-quantity.asc") {
-          queryProductsWithSort = queryProductsWithSort.order({
-            maxProteinTotal: "ASC",
-          });
-        }
+        if (searchProtein) {
+          if (sort === "protein-quantity.asc") {
+            queryProductsWithSort = queryProductsWithSort.order({
+              maxProteinTotal: "ASC",
+            });
+          }
 
-        if (sort === "protein-quantity.desc") {
-          queryProductsWithSort = queryProductsWithSort.order({
-            maxProteinTotal: "DESC",
-          });
-        }
+          if (sort === "protein-quantity.desc") {
+            queryProductsWithSort = queryProductsWithSort.order({
+              maxProteinTotal: "DESC",
+            });
+          }
 
-        if (sort === "protein-price.asc") {
-          queryProductsWithSort = queryProductsWithSort.order({
-            minPriceGramProtein: "ASC",
-          });
-        }
+          if (sort === "protein-price.asc") {
+            queryProductsWithSort = queryProductsWithSort.order({
+              minPriceGramProtein: "ASC",
+            });
+          }
 
-        if (sort === "protein-price.desc") {
-          queryProductsWithSort = queryProductsWithSort.order({
-            minPriceGramProtein: "DESC",
-          });
+          if (sort === "protein-price.desc") {
+            queryProductsWithSort = queryProductsWithSort.order({
+              minPriceGramProtein: "DESC",
+            });
+          }
         }
       } else {
         queryProductsWithSort = queryProductsWithSort.order({
