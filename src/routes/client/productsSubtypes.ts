@@ -91,6 +91,7 @@ export const productsSubtypesClientRoutes = new Elysia({
           "priceDose",
           "weight",
           "capsules",
+          "portion",
           {
             company: (q) => q.companies.select("slug", "name"),
             flavorsCount: (q) => q.productsFlavors.count(),
