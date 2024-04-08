@@ -16,15 +16,15 @@
     "@elysiajs/static": "^1.0.2",
     "dotenv": "^16.4.5",
     "elysia": "latest",
-    "orchid-orm": "^1.24.0",
-    "orchid-orm-valibot": "^0.0.9",
+    "orchid-orm": "^1.24.2",
+    "orchid-orm-valibot": "^0.0.10",
     "sharp": "^0.33.3",
     "valibot": "^0.30.0"
   },
   "devDependencies": {
     "bun-types": "latest",
-    "rake-db": "^2.16.0",
-    "orchid-orm-test-factory": "^0.5.12",
+    "rake-db": "^2.17.3",
+    "orchid-orm-test-factory": "^0.5.13",
     "@types/node": "^20.12.5",
     "typescript": "^5.4.4"
   },
