@@ -6,6 +6,7 @@ export class NutritionalInformationsTable extends BaseTable {
   columns = this.setColumns((t) => ({
     id: t.identity().primaryKey(),
     name: t.varchar(),
+    slug: t.varchar().index(),
     ...t.timestampsNoTZ(),
   }));
 

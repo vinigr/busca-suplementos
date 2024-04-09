@@ -1,5 +1,6 @@
 import { Elysia, t } from "elysia";
 import { db } from "../../db/db";
+import { generateSlug } from "../../helpers/generateSlug";
 
 export const productsNutritionalInformationsRoutes = new Elysia({
   prefix: "/products-nutritional-informations",
@@ -7,8 +8,10 @@ export const productsNutritionalInformationsRoutes = new Elysia({
   .post(
     "/",
     async ({ body }) => {
+      const slug = generateSlug(body.nutritionalInformationName.trim());
+
       const nutritionalInformation = await db.nutritionalInformations
-        .findByOptional({ name: body.nutritionalInformationName.trim() })
+        .findByOptional({ slug })
         .select("id");
 
       let nutritionalInformationId = nutritionalInformation?.id;
@@ -17,6 +20,7 @@ export const productsNutritionalInformationsRoutes = new Elysia({
         const nutritionalInformationInsert =
           await db.nutritionalInformations.create({
             name: body.nutritionalInformationName.trim(),
+            slug,
           });
 
         nutritionalInformationId = nutritionalInformationInsert.id;
@@ -66,11 +70,13 @@ export const productsNutritionalInformationsRoutes = new Elysia({
               const name =
                 nutritrionalInformation.nutritionalInformation.trim();
 
+              const slug = generateSlug(name);
+
               const treatedNutritionalInformation =
                 name.charAt(0).toUpperCase() + name.slice(1);
 
               const nutritionalInformation = await db.nutritionalInformations
-                .findByOptional({ name: treatedNutritionalInformation })
+                .findByOptional({ slug })
                 .select("id");
 
               let nutritionalInformationId = nutritionalInformation?.id;
@@ -79,6 +85,7 @@ export const productsNutritionalInformationsRoutes = new Elysia({
                 const nutritionalInformationInsert =
                   await db.nutritionalInformations.create({
                     name: treatedNutritionalInformation,
+                    slug,
                   });
 
                 nutritionalInformationId = nutritionalInformationInsert.id;
