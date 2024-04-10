@@ -28,6 +28,10 @@ export const productsAdminRoutes = new Elysia({ prefix: "/products" })
 
       let countProducts = db.products.count();
 
+      if (companyId) {
+        countProducts = countProducts.where({ companyId });
+      }
+
       if (search) {
         countProducts = countProducts.where({
           name: { contains: String(search) },
