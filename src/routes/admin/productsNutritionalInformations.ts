@@ -137,6 +137,60 @@ export const productsNutritionalInformationsRoutes = new Elysia({
       }),
     }
   )
+  .post(
+    "/clone",
+    async ({ body }) => {
+      const nutritionalInformations = await db.productsNutritionalInformations
+        .where({
+          productNutritionalInformationGroupId:
+            body.productNutritionalInformationGroupIdClone,
+        })
+        .select(
+          "nutritionalInformationId",
+          "percentageDaily",
+          "productNutritionalInformationId",
+          "unitMeasurementId",
+          "isSubItem",
+          "quantity"
+        )
+        .order({ order: "ASC" });
+
+      await db.$transaction(async () => {
+        await Promise.all(
+          nutritionalInformations.map(
+            async (nutritrionalInformation, index: number) => {
+              await db.productsNutritionalInformations.insert({
+                productId: body.productId,
+                productNutritionalInformationGroupId:
+                  body.productNutritionalInformationGroupId,
+                nutritionalInformationId:
+                  nutritrionalInformation.nutritionalInformationId,
+                order: index + 1,
+                productNutritionalInformationId:
+                  nutritrionalInformation.productNutritionalInformationId,
+                percentageDaily:
+                  nutritrionalInformation.percentageDaily || null,
+                quantity: nutritrionalInformation.quantity,
+                unitMeasurementId: nutritrionalInformation.unitMeasurementId,
+                isSubItem: nutritrionalInformation.isSubItem,
+              });
+            }
+          )
+        );
+      });
+    },
+    {
+      body: t.Object({
+        productId: t.Numeric({ error: "Produto não informado" }),
+        productNutritionalInformationGroupId: t.Numeric({
+          error: "Grupo não informado",
+        }),
+        productNutritionalInformationGroupIdClone: t.Numeric({
+          error: "Grupo para clonar informações nutricionais não informado",
+        }),
+      }),
+    }
+  )
   .delete(
     "/:id",
     async ({ params: { id } }) => {

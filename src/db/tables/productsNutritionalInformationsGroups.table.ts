@@ -12,7 +12,7 @@ export class ProductsNutritionalInformationsGroupsTable extends BaseTable {
   }));
 
   relations = {
-    products: this.belongsTo(() => ProductsTable, {
+    product: this.belongsTo(() => ProductsTable, {
       columns: ["productId"],
       references: ["id"],
     }),

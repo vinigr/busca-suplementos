@@ -87,4 +87,21 @@ export const productsNutritionalInformationsGroupsRoutes = new Elysia({
         id: t.Numeric(),
       }),
     }
+  )
+  .get(
+    "/search/:search",
+    async ({ params: { search } }) => {
+      return await db.productsNutritionalInformationsGroups
+        .join("product")
+        .where({ name: { contains: search } })
+        .orWhere({ "product.name": { contains: search } })
+        .select("id", "name", {
+          product: (q) => q.product.select("name"),
+        });
+    },
+    {
+      params: t.Object({
+        search: t.String(),
+      }),
+    }
   );
