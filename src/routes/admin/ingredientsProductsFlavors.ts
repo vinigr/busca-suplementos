@@ -1,6 +1,5 @@
 import { Elysia, t } from "elysia";
 import { db } from "../../db/db";
-import { set } from "valibot";
 import { generateSlug } from "../../helpers/generateSlug";
 
 export const ingredientsProductsFlavors = new Elysia({
@@ -101,6 +100,40 @@ export const ingredientsProductsFlavors = new Elysia({
         }),
         capsule: t.Boolean({
           error: "Não foi informado se é ingrediente de cápsula",
+        }),
+      }),
+    }
+  )
+  .post(
+    "/clone",
+    async ({ body }) => {
+      console.log("aqui");
+
+      const ingredientsProductClone = await db.ingredientsProductsFlavors
+        .where({ productFlavorId: body.productFlavorIdClone })
+        .select("ingredientId", "capsule")
+        .order({
+          order: "ASC",
+        });
+
+      await db.$transaction(async () => {
+        await Promise.all(
+          ingredientsProductClone.map(async (ingredient, index) => {
+            await db.ingredientsProductsFlavors.insert({
+              ingredientId: ingredient.ingredientId,
+              productFlavorId: body.productFlavorId,
+              order: index + 1,
+              capsule: ingredient.capsule,
+            });
+          })
+        );
+      });
+    },
+    {
+      body: t.Object({
+        productFlavorId: t.Numeric({ error: "Sabor do produto não informado" }),
+        productFlavorIdClone: t.Numeric({
+          error: "Sabor de produto para clonar ingredientes não informado",
         }),
       }),
     }

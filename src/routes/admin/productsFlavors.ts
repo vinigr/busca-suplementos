@@ -237,4 +237,22 @@ export const productsFlavorsRoutes = new Elysia({
         image: t.File(),
       }),
     }
+  )
+  .get(
+    "/search/:search",
+    async ({ params: { search } }) => {
+      return await db.productsFlavors
+        .join("product")
+        .join("flavor")
+        .where({ "flavor.name": { contains: search } })
+        .orWhere({ "product.name": { contains: search } })
+        .select("id", "flavor.name", {
+          product: (q) => q.product.select("name"),
+        });
+    },
+    {
+      params: t.Object({
+        search: t.String(),
+      }),
+    }
   );
