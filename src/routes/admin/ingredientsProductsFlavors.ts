@@ -107,8 +107,6 @@ export const ingredientsProductsFlavors = new Elysia({
   .post(
     "/clone",
     async ({ body }) => {
-      console.log("aqui");
-
       const ingredientsProductClone = await db.ingredientsProductsFlavors
         .where({ productFlavorId: body.productFlavorIdClone })
         .select("ingredientId", "capsule")

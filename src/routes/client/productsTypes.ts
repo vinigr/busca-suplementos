@@ -183,6 +183,10 @@ export const productsTypesClientRoutes = new Elysia({
           });
         }
 
+        if (sort === "name.asc") {
+          queryProductsWithSort = queryProductsWithSort.order({ name: "ASC" });
+        }
+
         if (sort === "name.desc") {
           queryProductsWithSort = queryProductsWithSort.order({ name: "DESC" });
         }
@@ -213,6 +217,8 @@ export const productsTypesClientRoutes = new Elysia({
           }
         }
       } else {
+        console.log("aqui");
+
         queryProductsWithSort = queryProductsWithSort.order({
           "products.name": "ASC",
         });
