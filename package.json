@@ -18,7 +18,7 @@
     "elysia": "latest",
     "orchid-orm": "^1.24.2",
     "orchid-orm-valibot": "^0.0.10",
-    "puppeteer": "^22.6.3",
+    "puppeteer": "^22.6.4",
     "sharp": "^0.33.3",
     "valibot": "^0.30.0"
   },
@@ -26,8 +26,8 @@
     "bun-types": "latest",
     "rake-db": "^2.17.3",
     "orchid-orm-test-factory": "^0.5.13",
-    "@types/node": "^20.12.5",
-    "typescript": "^5.4.4"
+    "@types/node": "^20.12.7",
+    "typescript": "^5.4.5"
   },
   "module": "src/index.js"
 }
